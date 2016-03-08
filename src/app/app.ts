@@ -67,7 +67,7 @@ import {Todo} from './components/todo/todo.component';
     </main>
 
     <footer>
-      Angular 2 MEAN Webpack Starter by <a [href]="url">@datatype_void</a>
+      .NET Videos
       <div>
         <img [src]="angularLogo" width="10%">
       </div>
@@ -87,8 +87,8 @@ import {Todo} from './components/todo/todo.component';
 ])
 export class App {
   angularLogo = 'assets/img/angular-logo.png';
-  name = 'Angular 2 MEAN Webpack Starter';
-  url = 'https://twitter.com/datatype_void';
+  name = '.NET Videos';
+  url = 'https://twitter.com/jakubszumiato';
 
   constructor() {
 

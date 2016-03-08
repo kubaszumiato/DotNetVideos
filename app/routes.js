@@ -73,6 +73,6 @@ export default (app, router, passport) => {
   app.get('*', (req, res) => {
 
     // Load our src/app.html file
-    res.sendfile('./dist/index.html');
+    res.sendfile('./src/index.html');
   });
 };
