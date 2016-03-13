@@ -17,59 +17,60 @@ import scsslint from 'gulp-scss-lint';
 import path from 'path';
 import del from 'del';
 import globby from 'globby';
+import ts from 'gulp-typescript';
 
 // Define `JavaScript` files to watch/ignore
 let jsGlob = ['**/*.js', '!{node_modules,node_modules/**}', '!{docs,doc/**}',
-  '!{dist,dist/**}', '!{coverage,coverage/**}', '!src/{res,res/**}',
-  '!config/env.conf.js'];
+    '!{dist,dist/**}', '!{coverage,coverage/**}', '!src/{res,res/**}',
+    '!config/env.conf.js'];
 
 // Define `TypeScript` files to watch/ignore
 let tsGlob = ['**/*.ts', '!{node_modules,node_modules/**}', '!{docs,doc/**}',
-  '!{dist,dist/**}', '!{coverage,coverage/**}', '!src/{res,res/**}'];
+    '!{dist,dist/**}', '!{coverage,coverage/**}', '!src/{res,res/**}'];
 
 // Define `Sass` files to watch/ignore
 let scssGlob = ['**/*.scss', '!{node_modules,node_modules/**}',
-  '!{dist,dist/**}', '!{docs,doc/**}', '!{coverage,coverage/**}', '!src/{res,res/**}'];
+    '!{dist,dist/**}', '!{docs,doc/**}', '!{coverage,coverage/**}', '!src/{res,res/**}'];
 
 // Create the default task and have it clear out all existing
 // documentation; watch all neccessary files for automatic
 // documentation generation as well as linting all `sass` styles.
 gulp.task('default', ['clean:docs',
-                      'watch:docs',
-                      'watch:sass']);
+    'watch:docs',
+    'watch:sass']);
 
 // Watch `Sass` files for changes and lint
 gulp.task('watch:sass', () => {
 
-  gulp.watch(scssGlob, function (event) {
-    return gulp.src(event.path)
-      .pipe(scsslint());
-  });
+    gulp.watch(scssGlob, function(event) {
+        return gulp.src(event.path)
+            .pipe(scsslint());
+    });
 });
 
 gulp.task('build:docs', () => {
 
-  // Take a file `glob` pattern and a file extension matching
-  // the extension of the files you are trying to generate
-  // documentation for
-  function generateDocs(fileSrc, ext) {
+    // Take a file `glob` pattern and a file extension matching
+    // the extension of the files you are trying to generate
+    // documentation for
+    function generateDocs(fileSrc, ext) {
 
-    console.log(ext);
+        console.log(ext);
 
-    if(ext == '') {
+        if (ext == '') {
 
-      throw new Error('Extension must be passed in for documentation to be generated properly!')
+            throw new Error('Extension must be passed in for documentation to be generated properly!')
+        }
+        return gulp.src(fileSrc)
+            .pipe(docco())
+            .pipe(gulp.dest(`docs/${ext}`));
     }
-    return gulp.src(fileSrc)
-      .pipe(docco())
-      .pipe(gulp.dest(`docs/${ext}`));
-  }
 
-  generateDocs(jsGlob, '.js');
+    generateDocs(jsGlob, '.js');
 
-  generateDocs(tsGlob, '.ts');
+    generateDocs(tsGlob, '.ts');
 
-  generateDocs(scssGlob, '.scss');
+    generateDocs(scssGlob, '.scss');
 
 });
 
@@ -77,105 +78,113 @@ gulp.task('build:docs', () => {
 // on the fly
 gulp.task('watch:docs', () => {
 
-  // For `gulp-docco` if the need arises
-  //  Default configuration options. All of these may be extended by user-specified options.
-  //
-  //  defaults =
-  //    layout:     'parallel'
-  //    output:     'docs'
-  //    template:   null
-  //    css:        null
-  //    extension:  null
-  //    languages:  {}
-  //    marked:     null
-  //
-  //  Example:
-  //
-  //  let docco = require("gulp-docco");
-  //
-  //  gulp.src("./src/*.js")
-  //    .pipe(docco(options))
-  //    .pipe(gulp.dest('./documentation-output'))
-  //
-  // Reference: https://www.npmjs.com/package/gulp-docco
-  //  Also see: https://jashkenas.github.io/docco/
-  //
-  let options = {
-    layout:     'parallel',
-    output:     'docs',
-    template:    null,
-    css:         null,
-    extension:   null,
-    languages:   {},
-    marked:      null
-  }
+    // For `gulp-docco` if the need arises
+    //  Default configuration options. All of these may be extended by user-specified options.
+    //
+    //  defaults =
+    //    layout:     'parallel'
+    //    output:     'docs'
+    //    template:   null
+    //    css:        null
+    //    extension:  null
+    //    languages:  {}
+    //    marked:     null
+    //
+    //  Example:
+    //
+    //  let docco = require("gulp-docco");
+    //
+    //  gulp.src("./src/*.js")
+    //    .pipe(docco(options))
+    //    .pipe(gulp.dest('./documentation-output'))
+    //
+    // Reference: https://www.npmjs.com/package/gulp-docco
+    //  Also see: https://jashkenas.github.io/docco/
+    //
+    let options = {
+        layout: 'parallel',
+        output: 'docs',
+        template: null,
+        css: null,
+        extension: null,
+        languages: {},
+        marked: null
+    }
 
-  // Alert the user whenever changes have been detected and documentation
-  // generation is occurring
-  function generateUserAlert(ext) {
+    // Alert the user whenever changes have been detected and documentation
+    // generation is occurring
+    function generateUserAlert(ext) {
 
-    switch(ext) {
+        switch (ext) {
 
-        case '.js':
-          console.log('A JavaScript file has changed; documentation will now be generated...');
+            case '.js':
+                console.log('A JavaScript file has changed; documentation will now be generated...');
 
-          break;
+                break;
 
-        case '.scss':
-          console.log('A Sass file has changed; documentation will now be generated...');
+            case '.scss':
+                console.log('A Sass file has changed; documentation will now be generated...');
 
-          break;
+                break;
 
-        case '.ts':
-          console.log('A TypeScript file has changed; documentation will now be generated...');
+            case '.ts':
+                console.log('A TypeScript file has changed; documentation will now be generated...');
 
-          break;
+                break;
 
-        default:
-          console.log('Generating appropriate folders and styles...');
+            default:
+                console.log('Generating appropriate folders and styles...');
 
-          break;
-      }
+                break;
+        }
 
-      return;
-  }
+        return;
+    }
 
-  // Watch files specified and generate the documentation
-  // whenever changes are detected.
-  function generateDocs(fileSrc) {
-    gulp.watch(fileSrc, function (event, ext = path.extname(event.path)) {
+    // Watch files specified and generate the documentation
+    // whenever changes are detected.
+    function generateDocs(fileSrc) {
+        gulp.watch(fileSrc, function(event, ext = path.extname(event.path)) {
 
-      generateUserAlert(ext);
+            generateUserAlert(ext);
 
-      // Ignore docs, bower_components and node_modules
-      return gulp.src(fileSrc)
-        .pipe(docco())
-        .pipe(gulp.dest(`docs/${ext}`))
-        .on('error', gutil.log);
-    });
-  }
+            // Ignore docs, bower_components and node_modules
+            return gulp.src(fileSrc)
+                .pipe(docco())
+                .pipe(gulp.dest(`docs/${ext}`))
+                .on('error', gutil.log);
+        });
+    }
 
-  // Generate documentation for files specified in `glob` vars at top
-  // of file
-  generateDocs(jsGlob);
+    // Generate documentation for files specified in `glob` vars at top
+    // of file
+    generateDocs(jsGlob);
 
-  generateDocs(tsGlob);
+    generateDocs(tsGlob);
 
-  generateDocs(scssGlob);
+    generateDocs(scssGlob);
 });
 
 // Sugar for `gulp serve:watch`
-gulp.task('serve', ['serve:watch']);
+gulp.task('serve', ['buildServer', 'serve:watch']);
+
+gulp.task('buildServer', function() {
+    var tsProject = ts.createProject(path.resolve('./tsconfig.json'));
+    return gulp.src(path.resolve('./app/**/*.ts'))
+        .pipe(ts(tsProject))
+        .js
+        .pipe(gulp.dest(path.resolve('./app')))
+});
 
 // Configure gulp-nodemon
 // This watches the files belonging to the app for changes
 // and restarts the server whenever a change is detected
 gulp.task('serve:watch', () => {
 
-  nodemon({
-    script : 'server.js',
-    ext : 'js'
-  });
+    nodemon({
+        script: 'server.js',
+        ext: 'js ts'
+    });
 });
 
 // Use the 'del' module to clear all traces of documentation
@@ -183,15 +192,15 @@ gulp.task('serve:watch', () => {
 // Not currently working due to a globbing issue
 // See: https://github.com/sindresorhus/del/issues/50
 gulp.task('clean:docs', (callback) => {
-  del(['./docs/**/*']).then(function (paths) {
-    callback(); // ok
-  }, function (reason) {
-    callback('Failed to delete files: ' + reason); // fail
-  });
+    del(['./docs/**/*']).then(function(paths) {
+        callback(); // ok
+    }, function(reason) {
+        callback('Failed to delete files: ' + reason); // fail
+    });
 });
 
-gulp.task('clean:docsTEST', function () {
-  console.log('current directory: ', require('process').cwd());
-  console.log('files:', globby.sync(['./docs/**/*']));
-  return del(['docs/**/*']);
+gulp.task('clean:docsTEST', function() {
+    console.log('current directory: ', require('process').cwd());
+    console.log('files:', globby.sync(['./docs/**/*']));
+    return del(['docs/**/*']);
 });
