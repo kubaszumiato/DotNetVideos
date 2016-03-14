@@ -24,7 +24,7 @@ var PORT = process.env.PORT || 8080;
 var config = require('./config/config.json');
 
 var metadata = {
-  title: 'Angular 2 MEAN Webpack Starter Kit by @datatype_void',
+  title: 'Angular2 Webpack Starter by @gdi2990 from @AngularClass',
   baseUrl: '/',
   host: HOST,
   port: PORT,

@@ -36,16 +36,16 @@ let scssGlob = ['**/*.scss', '!{node_modules,node_modules/**}',
 // documentation; watch all neccessary files for automatic
 // documentation generation as well as linting all `sass` styles.
 gulp.task('default', ['clean:docs',
-    'watch:docs',
-    'watch:sass']);
+                      'watch:docs',
+                      'watch:sass']);
 
 // Watch `Sass` files for changes and lint
 gulp.task('watch:sass', () => {
 
-    gulp.watch(scssGlob, function(event) {
-        return gulp.src(event.path)
-            .pipe(scsslint());
-    });
+  gulp.watch(scssGlob, function (event) {
+    return gulp.src(event.path)
+      .pipe(scsslint());
+  });
 });
 
 gulp.task('build:docs', () => {

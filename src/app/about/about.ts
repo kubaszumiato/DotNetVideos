@@ -6,10 +6,7 @@ import {Component} from 'angular2/core';
  * see https://github.com/gdi2290/es6-promise-loader for more info
  */
 
-
 console.log('`About` component loaded asynchronously');
-
-
 
 @Component({
     selector: 'about',
