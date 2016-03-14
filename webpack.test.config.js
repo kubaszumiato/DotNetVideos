@@ -40,24 +40,25 @@ module.exports = {
             "removeComments": true,
           }
         },
-        exclude: [ /\.e2e\.ts$/ ]
+        exclude: [ /\.e2e\.ts$/, helpers.root('node_modules') ]
       },
       {
         test: /\.json$/,
         loader: 'json-loader',
-        exclude: [ helpers.root('src/index.html') ] },
+        exclude: [ helpers.root('src/index.html'), helpers.root('node_modules') ] },
       {
         test: /\.html$/,
         loader: 'raw-loader',
-        exclude: [ helpers.root('src/index.html') ] },
+        exclude: [ helpers.root('src/index.html'), helpers.root('node_modules') ] },
       {
         test: /\.css$/,
         loader: 'raw-loader',
-        exclude: [ helpers.root('src/index.html') ] },
+        exclude: [ helpers.root('src/index.html'), helpers.root('node_modules') ] },
       {
         test: /\.scss$/,
         loader: 'style!css!autoprefixer-loader?browsers=last 2 versions!sass',
-        exclude: [ helpers.root('src/index.html') ] },
+        exclude: [ helpers.root('node_modules') ]
+      }
     ],
     postLoaders: [
       // instrument only testing sources with Istanbul
@@ -75,8 +76,10 @@ module.exports = {
   plugins: [
     new DefinePlugin({
       // Environment helpers
-      'ENV': JSON.stringify(ENV),
-      'HMR': false
+      'process.env': {
+        'ENV': JSON.stringify(ENV),
+        'NODE_ENV': JSON.stringify(ENV)
+      }
     })
   ],
   node: {

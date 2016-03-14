@@ -12,9 +12,9 @@ var HMR = helpers.hasProcessFlag('hot');
 var config = require('./config/config.json');
 
 var metadata = {
-  title: '.NET Videos aggregated. No unnecessary, useless stuff. Pure knowledge at hand.',
+  title: 'Angular 2 MEAN Webpack Starter Kit by @datatype_void',
   baseUrl: '/',
-  host: 'localhost',
+  host: '0.0.0.0',
   port: 8080,
   ENV: ENV,
   HMR: HMR

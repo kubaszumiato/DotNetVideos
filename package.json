@@ -1,5 +1,5 @@
 {
-    "name": "dotnet-videos",
+   "name": "dotnet-videos",
     "version": "0.0.1",
     "description": "Free, open-source website aggregating videos about .NET related development topics",
     "author": "Jakub Szumiato <kuba.szumiato@gmail.com>",
