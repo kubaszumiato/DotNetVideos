@@ -4,7 +4,10 @@ import {FORM_DIRECTIVES} from 'angular2/common';
 import {Title} from './services/title';
 import {XLarge} from './directives/x-large';
 
-import {Accordion, AccordionGroup} from '../components/accordion/accordion.component';
+import {Accordion} from '../shared/components/accordion/accordion.component';
+
+import {AccordionGroup} from
+  '../shared/components/accordion/accordion-group.component';
 
 // Import NgFor directive
 import {NgFor} from 'angular2/common';
@@ -36,6 +39,7 @@ import {NgFor} from 'angular2/common';
 export class Home {
   // Set our default values
   data = { value: '' };
+
   // TypeScript public modifiers
   constructor(public title: Title) {
 

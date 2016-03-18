@@ -43,7 +43,8 @@ module.exports = {
 
   entry: {
     'polyfills':'./src/polyfills.ts',
-    'main':'./src/main.ts' // our angular app
+    'vendor': './src/vendor.ts',
+    'app':'./src/main.ts' // our angular app
   },
 
   // Config for our build files
@@ -88,32 +89,26 @@ module.exports = {
           }
         },
         exclude: [
-          /\.(spec|e2e)\.ts$/,
-          helpers.root('node_modules')
+          /\.(spec|e2e)\.ts$/
         ]
       },
 
       // Support for *.json files.
       {
         test: /\.json$/,
-        loader: 'json-loader',
-        exclude: [ helpers.root('node_modules') ]
+        loader: 'json-loader'
       },
 
       // Support for CSS as raw text
       {
         test: /\.css$/,
-        loader: 'raw-loader',
-        exclude: [ helpers.root('node_modules') ]
+        loader: 'raw-loader'
       },
 
       // support for .html as raw text
       {
         test: /\.html$/,
-        loader: 'raw-loader',
-        exclude: [
-          helpers.root('src/index.html')
-        ]
+        loader: 'raw-loader'
       },
 
       // support for sass imports
@@ -121,8 +116,7 @@ module.exports = {
       // `require("!style!css!sass!./file.scss");`
       {
         test: /\.scss$/,
-        loader: 'style!css!autoprefixer-loader?browsers=last 2 versions!sass',
-        exclude: [ helpers.root('node_modules') ]
+        loader: 'style!css!autoprefixer-loader?browsers=last 2 versions!sass'
       }
 
     ],
@@ -139,9 +133,9 @@ module.exports = {
     new DedupePlugin(),
     new OccurenceOrderPlugin(true),
     new CommonsChunkPlugin({
-      name: 'polyfills',
-      filename: 'polyfills.[chunkhash].bundle.js',
-      chunks: Infinity
+      name: ['app', 'vendor', 'polyfills'],
+      filename: '[name].bundle.js',
+      minChunks: Infinity
     }),
     // static assets
     new CopyWebpackPlugin([
@@ -154,10 +148,8 @@ module.exports = {
     new HtmlWebpackPlugin({ template: 'src/index.html' }),
     new DefinePlugin({
       // Environment helpers
-      'process.env': {
-        'ENV': JSON.stringify(metadata.ENV),
-        'NODE_ENV': JSON.stringify(metadata.ENV)
-      }
+      'ENV': JSON.stringify(metadata.ENV),
+      'HMR': false
     }),
     new UglifyJsPlugin({
       // to debug prod builds uncomment //debug lines and comment //prod lines
@@ -177,6 +169,13 @@ module.exports = {
       mangle: {
         screw_ie8 : true,
         except: [
+          'App',
+          'About',
+          'Contact',
+          'Home',
+          'Menu',
+          'Footer',
+          'XLarge',
           'RouterActive',
           'RouterLink',
           'RouterOutlet',
@@ -186,10 +185,24 @@ module.exports = {
           'NgSwitch',
           'NgStyle',
           'NgSwitchDefault',
-          'NgModel',
           'NgControl',
+          'NgControlName',
+          'NgControlGroup',
           'NgFormControl',
+          'NgModel',
+          'NgFormModel',
           'NgForm',
+          'NgSelectOption',
+          'DefaultValueAccessor',
+          'NumberValueAccessor',
+          'CheckboxControlValueAccessor',
+          'SelectControlValueAccessor',
+          'RadioControlValueAccessor',
+          'NgControlStatus',
+          'RequiredValidator',
+          'MinLengthValidator',
+          'MaxLengthValidator',
+          'PatternValidator',
           'AsyncPipe',
           'DatePipe',
           'JsonPipe',

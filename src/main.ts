@@ -10,12 +10,21 @@ import {ROUTER_PROVIDERS,
 import {FORM_PROVIDERS} from 'angular2/common';
 import {HTTP_PROVIDERS} from 'angular2/http';
 
+
+// Import module to provide an app `store` for the life-cycle of the app
+import {provideStore} from '@ngrx/store';
+
+// Import all of the files necessary for our `recipes` component
+import {RecipeService} from './app/recipes/recipe.service';
+import {recipes} from './app/recipes/recipes.reducer';
+import {selectedRecipe} from './app/recipes/selected-recipe.reducer';
+
 /*
  * App Component
  * our top level component that holds all of our components
  */
 import {App} from './app/app';
-import {RouterActive} from './app/directives/router-active';
+import {RouterActive} from './app/shared/directives/router-active';
 
 /*
  * Application Providers/Directives/Pipes
@@ -52,7 +61,7 @@ if ('production' === ENV) {
 }
 
 /*
- * Bootstrap our Angular app with a top level component `App` and inject
+* Bootstrap our Angular app with a top level component `App` and inject
  * our Services and Providers into Angular's dependency injection
  */
 export function main() {
@@ -63,7 +72,15 @@ export function main() {
             {useValue: APPLICATION_DIRECTIVES, multi: true}),
 
          ngCore.provide(ngCore.PLATFORM_PIPES,
-             {useValue: APPLICATION_PIPES, multi: true})
+             {useValue: APPLICATION_PIPES, multi: true}),
+
+         // These are the primary consumers of our app store
+         RecipeService,
+         // Inititialize app store available to entire app
+         // and pass in our reducers.
+         // Notice that we are passing in an object that matches the
+         // `AppStore` interface
+         provideStore({ recipes, selectedRecipe })
     ])
     .catch(err => console.error(err));
 }

@@ -14,8 +14,11 @@
 // Load our API routes for user authentication
 import authRoutes from './routes/_authentication.router.js';
 
-// Load our API routes for the todo app
+// Load our API routes for the `todo` component
 import todoRoutes from './routes/_todo.router.js';
+
+// Load our API routes for the `recipe` component
+import recipeRoutes from './routes/_recipe.router.js';
 
 export default (app, router, passport) => {
 
@@ -64,8 +67,10 @@ export default (app, router, passport) => {
   // Pass in our Express app and Router
   todoRoutes(app, router);
 
-  // All of our routes will be prefixed with /api
-  app.use('/api', router);
+	recipeRoutes(app, router);
+
+	// All of our routes will be prefixed with /api
+	app.use('/api', router);
 
   // ### Frontend Routes
 

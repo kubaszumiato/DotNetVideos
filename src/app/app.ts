@@ -21,9 +21,11 @@ import {Home} from './home/home';
 // Import NgFor directive
 import {NgFor} from 'angular2/common';
 
-// Import of Todo component
-import {Todo} from './components/todo/todo.component';
+// Import Todo component
+import {Todo} from './todo/todo.component';
 
+// Import Recipes component
+import {Recipes} from './recipes/recipes.component';
 
 /*
  * App Component
@@ -36,7 +38,7 @@ import {Todo} from './components/todo/todo.component';
                 NgFor],
   pipes: [],
   // Load our main `Sass` file into our `app` `component`
-  styleUrls: [require("!style!css!sass!../sass/main.scss")],
+  styleUrls: [require('!style!css!sass!../sass/main.scss')],
   template: `
     <header>
       <nav>
@@ -50,6 +52,9 @@ import {Todo} from './components/todo/todo.component';
           </li>
           <li router-active>
             <a [routerLink]=" ['Todo'] ">Todo</a>
+          </li>
+          <li router-active>
+            <a [routerLink]=" ['Recipes'] ">NG2 Redux</a>
           </li>
           <li router-active>
             <a [routerLink]=" ['About'] ">About</a>
@@ -74,6 +79,7 @@ import {Todo} from './components/todo/todo.component';
   { path: '/', name: 'Index', component: Home, useAsDefault: true },
   { path: '/home',  name: 'Home',  component: Home },
   { path: '/todo', component: Todo, name: 'Todo' },
+  { path: '/redux', component: Recipes, name: 'Recipes' },
   // Async load a component using Webpack's require with
   // es6-promise-loader and webpack `require`
   { path: '/about', name: 'About', loader: () => require('es6-promise!./about/about')('About') },
