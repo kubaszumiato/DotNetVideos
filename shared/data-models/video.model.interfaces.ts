@@ -3,7 +3,7 @@ import {Tag} from '../../app/models/video/video.tag';
 import {VideoType} from '../../app/models/video/video.enums';
 import User from '../../app/models/user/user.model';
 
-interface IVideo extends mongoose.Document {
+export interface IVideo extends mongoose.Document {
   //each video has some title which is displayed first ot the user
   title: { type : String },
   //each video must have an Url, whatever the place of publication
@@ -24,4 +24,3 @@ interface IVideo extends mongoose.Document {
   owner: {type: User}
 };
 
-export default IVideo;

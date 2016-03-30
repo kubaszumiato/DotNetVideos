@@ -1,0 +1,13 @@
+<div>
+    <p>
+        Hello from Videos List component! Glad you're here. Let's try to print some videos:
+    </p>
+    <div class="checkbox" *ngFor="#video of videos">
+        <label>
+                 {{video.title}}
+              </label>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary btn-lg" (click)="createVideo()">Add</button>
+</div>

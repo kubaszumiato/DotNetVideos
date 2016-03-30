@@ -36,16 +36,16 @@ let scssGlob = ['**/*.scss', '!{node_modules,node_modules/**}',
 // documentation; watch all neccessary files for automatic
 // documentation generation as well as linting all `sass` styles.
 gulp.task('default', ['clean:docs',
-                      'watch:docs',
-                      'watch:sass']);
+    'watch:docs',
+    'watch:sass']);
 
 // Watch `Sass` files for changes and lint
 gulp.task('watch:sass', () => {
 
-  gulp.watch(scssGlob, function (event) {
-    return gulp.src(event.path)
-      .pipe(scsslint());
-  });
+    gulp.watch(scssGlob, function (event) {
+        return gulp.src(event.path)
+            .pipe(scsslint());
+    });
 });
 
 gulp.task('build:docs', () => {
@@ -144,7 +144,7 @@ gulp.task('watch:docs', () => {
     // Watch files specified and generate the documentation
     // whenever changes are detected.
     function generateDocs(fileSrc) {
-        gulp.watch(fileSrc, function(event, ext = path.extname(event.path)) {
+        gulp.watch(fileSrc, function (event, ext = path.extname(event.path)) {
 
             generateUserAlert(ext);
 
@@ -168,7 +168,7 @@ gulp.task('watch:docs', () => {
 // Sugar for `gulp serve:watch`
 gulp.task('serve', ['buildServer', 'serve:watch']);
 
-gulp.task('buildServer', function() {
+gulp.task('buildServer', function () {
     var tsProject = ts.createProject(path.resolve('./tsconfig.json'));
     return gulp.src(path.resolve('./app/**/*.ts'))
         .pipe(ts(tsProject))
@@ -183,6 +183,13 @@ gulp.task('serve:watch', () => {
 
     nodemon({
         script: 'server.js',
+        tasks: function (changedFiles) {
+            var tasks = []
+            changedFiles.forEach(function (file) {
+                if (path.extname(file) === '.ts' && !~tasks.indexOf('buildServer')) tasks.push('buildServer')
+            })
+            return tasks
+        },
         ext: 'js ts'
     });
 });
@@ -192,9 +199,9 @@ gulp.task('serve:watch', () => {
 // Not currently working due to a globbing issue
 // See: https://github.com/sindresorhus/del/issues/50
 gulp.task('clean:docs', (callback) => {
-    del(['./docs/**/*']).then(function(paths) {
+    del(['./docs/**/*']).then(function (paths) {
         callback(); // ok
-    }, function(reason) {
+    }, function (reason) {
         callback('Failed to delete files: ' + reason); // fail
     });
 });

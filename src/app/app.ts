@@ -25,7 +25,7 @@ import {NgFor} from 'angular2/common';
 import {Todo} from './todo/todo.component';
 
 // Import Recipes component
-import {Recipes} from './recipes/recipes.component';
+import {VideoList} from './videos/videos';
 
 /*
  * App Component
@@ -34,52 +34,40 @@ import {Recipes} from './recipes/recipes.component';
 @Component({
   selector: 'app',
   providers: [  ],
-  directives: [ Todo,
-                NgFor],
+  directives: [NgFor],
   pipes: [],
   // Load our main `Sass` file into our `app` `component`
   styleUrls: [require('!style!css!sass!../sass/main.scss')],
   template: `
-    <header>
-      <nav>
+  <header>
+    <nav>
         <h1>Hello {{ name }}</h1>
         <ul>
-          <li router-active>
-            <a [routerLink]=" ['Index'] ">Index</a>
-          </li>
-          <li router-active>
-            <a [routerLink]=" ['Home'] ">Home</a>
-          </li>
-          <li router-active>
-            <a [routerLink]=" ['Todo'] ">Todo</a>
-          </li>
-          <li router-active>
-            <a [routerLink]=" ['Recipes'] ">NG2 Redux</a>
-          </li>
-          <li router-active>
-            <a [routerLink]=" ['About'] ">About</a>
-          </li>
+            <li router-active>
+                <a [routerLink]=" ['Home'] ">Home</a>
+            </li>
+            <li router-active>
+                <a [routerLink]=" ['About'] ">About</a>
+            </li>
         </ul>
-      </nav>
-    </header>
+    </nav>
+</header>
 
-    <main>
-      <router-outlet></router-outlet>
-    </main>
+<main>
+    <router-outlet></router-outlet>
+</main>
 
-    <footer>
-      .NET Videos
-      <div>
+<footer>
+    .NET Videos
+    <div>
         <img [src]="angularLogo" width="10%">
-      </div>
-    </footer>
+    </div>
+</footer>
   `
 })
 @RouteConfig([
-  { path: '/', name: 'Index', component: Home, useAsDefault: true },
-  { path: '/home',  name: 'Home',  component: Home },
-  { path: '/todo', component: Todo, name: 'Todo' },
-  { path: '/redux', component: Recipes, name: 'Recipes' },
+  { path: '/', name: 'Home', component: Home, useAsDefault: true },
+  { path: '/home',  name: 'Videos',  component: VideoList },
   // Async load a component using Webpack's require with
   // es6-promise-loader and webpack `require`
   { path: '/about', name: 'About', loader: () => require('es6-promise!./about/about')('About') },
