@@ -66,7 +66,7 @@ import {VideoList} from './videos/videos';
   `
 })
 @RouteConfig([
-  { path: '/', name: 'Home', component: Home, useAsDefault: true },
+  { path: '/', name: 'Videos', component: VideoList, useAsDefault: true },
   { path: '/home',  name: 'Videos',  component: VideoList },
   // Async load a component using Webpack's require with
   // es6-promise-loader and webpack `require`
