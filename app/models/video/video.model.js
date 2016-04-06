@@ -9,36 +9,22 @@
 // */app/models/video.model.js*
 // ## Video Model
 // Note: MongoDB will autogenerate an _id for each Todo object created
-// Grab the Mongoose module
+// Grab the Mongoose module and some references
 var mongoose = require('mongoose');
+//import User from '../user/user.model';
 // Create a `schema` for the `video` object
-// export interface IVideo extends mongoose.Document {
-//   //each video has some title which is displayed first ot the user
-//   title: { type : String },
-//   //each video must have an Url, whatever the place of publication
-//   url: { type : String},  
-//   //code defines the unique identifier of a movie within a given website, usually it's a part of URL
-//   code: { type : String},
-//   //mediaType describes what kind of movie is that (what type of file preciesly speaking)
-//   mediaType: { type : String},  
-//   //length in seconds
-//   length: { type : Number},  
-//   //videoType declares the website the movie is coming from, eg. YouTube
-//   videoType: { type : VideoType}
-//   //tags for movies, assigned by movie creator/importer
-//   tags: { type : Tag | Array<Tag>},    
-//   //internal rating by dotnet-videos users
-//   rating: { type : Number},  
-//   //who uploaded the movie
-//   owner: {type: User}
-// };
 var VideoSchema = new mongoose.Schema({
     title: { type: String },
     url: { type: String },
+    localUrl: { type: String },
     code: { type: String },
     mediaType: { type: String },
     videoLength: { type: Number },
+    videoOrigin: { type: String },
+    tags: { type: Array },
     rating: { type: Number },
+    owner: { type: String },
+    watchedCount: { type: Number }
 });
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = mongoose.model('Video', VideoSchema);

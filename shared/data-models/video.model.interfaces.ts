@@ -1,9 +1,11 @@
 import mongoose = require ('mongoose');
 import {Tag} from '../../app/models/video/video.tag';
-import {VideoType} from '../../app/models/video/video.enums';
+import {VideoOrigin} from '../../app/models/video/video.enums';
 import User from '../../app/models/user/user.model';
 
 export interface IVideo extends mongoose.Document {
+  //id for the already saved entity
+//  id: { type : string},
   //each video has some title which is displayed first ot the user
   title: { type : String },
   //each video must have an Url, whatever the place of publication
@@ -17,7 +19,7 @@ export interface IVideo extends mongoose.Document {
   //length in seconds
   videoLength: { type : Number},  
   //videoType declares the website the movie is coming from, eg. YouTube
-  videoType: { type : VideoType}
+  videoOrigin: { type : VideoOrigin}
   //tags for movies, assigned by movie creator/importer
   tags: { type : Tag | Array<Tag>},    
   //internal rating by dotnet-videos users

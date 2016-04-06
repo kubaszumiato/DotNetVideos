@@ -5,10 +5,16 @@ import {IVideo} from '../../../shared/data-models/video.model.interfaces'
 @Injectable()
 export class VideoService {
     constructor (public http:Http) {        
-    }    
+    }   
+     
     getVideos() {
         return this.http.get('/api/video')
             .map<IVideo[]>(res => res.json());
+    }
+    
+    getVideo(id) {
+        return this.http.get('/api/video/' + id)
+        .map<IVideo>(res => res.json());
     }
     
     createVideo(data) {

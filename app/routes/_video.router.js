@@ -60,11 +60,8 @@ export default (app, router) => {
 
     // Accessed at GET http://localhost:8080/api/todo
     .get((req, res) => {
-      console.log('im in get');
-//res.json({title: "abc"});
       // Use mongoose to get all todo items in the database
       Video.find((err, video) => {
-console.log('im in find');
         if(err)
           res.send(err);
 

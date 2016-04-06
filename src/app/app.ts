@@ -25,7 +25,8 @@ import {NgFor} from 'angular2/common';
 import {Todo} from './todo/todo.component';
 
 // Import Recipes component
-import {VideoList} from './videos/videos';
+import {VideoListComponent} from './videos/videos';
+import {VideoDetailsComponent}  from './videos/videos';
 
 /*
  * App Component
@@ -66,8 +67,9 @@ import {VideoList} from './videos/videos';
   `
 })
 @RouteConfig([
-  { path: '/', name: 'Videos', component: VideoList, useAsDefault: true },
-  { path: '/home',  name: 'Videos',  component: VideoList },
+  { path: '/', name: 'Videos', component: VideoListComponent, useAsDefault: true },
+  { path: '/home',  name: 'Videos',  component: VideoListComponent },
+  { path: '/video/:id', name: 'Video', component: VideoDetailsComponent},
   // Async load a component using Webpack's require with
   // es6-promise-loader and webpack `require`
   { path: '/about', name: 'About', loader: () => require('es6-promise!./about/about')('About') },

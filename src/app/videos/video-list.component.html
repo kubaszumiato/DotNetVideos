@@ -4,10 +4,10 @@
     </p>
     <div class="container-fluid" *ngIf="videos">
 
-        <div class="row border" *ngFor="#video of videos">
+        <div class="row border" *ngFor="#video of videos" >
             <div visibility=""></div>
             <!-- row: left hand side -->
-            <div class="col-md-2">
+            <div class="col-md-2" (click)="onVideoSelected(video)">
                 <img [src]="video.thumbUrl" />
             </div>
             <!-- row: right hand side -->
@@ -36,10 +36,10 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-            <video-details [mode]="create">
+        <!--<div class="container" *ngIf="selectedVideo">
+            <video-details //[videoDetails] ="selectedVideo">
             </video-details>
-        </div>
+        </div>-->
 
     </div>
 </div>

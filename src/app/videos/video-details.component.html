@@ -2,28 +2,28 @@
      <form id="video-details-add">
             <div visibility=""></div>
             <div class="col-md-2">
-                Title: {{video.title}}
+                Title: {{videoDetails.title}}
             </div>
             <div class="col-md-2">
-                Lenght: {{video.length}}
+                Lenght: {{videoDetails.length}}
             </div>
             <div class="col-md-2">
-                Rating: {{video.rating}}
+                Rating: {{videoDetails.rating}}
             </div>
             <div class="col-md-2">
-                Owner: {{video.owner}}
+                Owner: {{videoDetails.owner}}
             </div>
             <div class="col-md-2">
-                Watched: {{video.watchedCount}}
+                Watched: {{videoDetails.watchedCount}}
             </div>
             <div class="col-md-2">
-                Url: {{video.url}}
+                Url: {{videoDetails.url}}
             </div>
             <div class="col-md-2">
-                <a [href]="video.localUrl">Watch</a>
+                <a [href]="videoDetails.localUrl">Watch</a>
             </div>
             <div>
-                <button class="btn btn-warning" type="submit" />
+                <button class="btn btn-warning" type="submit" >Add </button>
             </div>
      </form>
 </div>
