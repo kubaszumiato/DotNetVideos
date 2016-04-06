@@ -44,7 +44,7 @@ import {VideoList} from './videos/videos';
         <h1>Hello {{ name }}</h1>
         <ul>
             <li router-active>
-                <a [routerLink]=" ['Home'] ">Home</a>
+                <a [routerLink]=" ['Videos'] ">Videos</a>
             </li>
             <li router-active>
                 <a [routerLink]=" ['About'] ">About</a>

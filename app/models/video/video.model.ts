@@ -49,7 +49,7 @@ let VideoSchema = new mongoose.Schema({
   url: { type : String},  
   code: { type : String},
   mediaType: { type : String},  
-  length: { type : Number},  
+  videoLength: { type : Number},  
   rating: { type : Number},  
  
 });

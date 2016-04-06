@@ -1,11 +1,29 @@
-import {Component} from 'angular2/core';
-import {Injectable} from 'angular2/core';
-
-@Component(
-    {
-        selector: 'videos-list',
-        templateUrl: './video.html'        
-    })
-export class Video{
-    
-}
+ <div class="row border">
+     <form id="video-details-add">
+            <div visibility=""></div>
+            <div class="col-md-2">
+                Title: {{video.title}}
+            </div>
+            <div class="col-md-2">
+                Lenght: {{video.length}}
+            </div>
+            <div class="col-md-2">
+                Rating: {{video.rating}}
+            </div>
+            <div class="col-md-2">
+                Owner: {{video.owner}}
+            </div>
+            <div class="col-md-2">
+                Watched: {{video.watchedCount}}
+            </div>
+            <div class="col-md-2">
+                Url: {{video.url}}
+            </div>
+            <div class="col-md-2">
+                <a [href]="video.localUrl">Watch</a>
+            </div>
+            <div>
+                <button class="btn btn-warning" type="submit" />
+            </div>
+     </form>
+</div>

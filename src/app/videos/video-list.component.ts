@@ -3,11 +3,11 @@ import {VideoService} from './video.service';
 import {IVideo} from '../../../shared/data-models/video.model.interfaces'
 import {NgFor} from 'angular2/common';
 import {HTTP_PROVIDERS} from 'angular2/http';
-
+import {VideoDetails} from './video-details.component';
 @Component(
     {
         selector: 'video-list',
-         providers: [...HTTP_PROVIDERS, VideoService]
+         providers: [...HTTP_PROVIDERS, VideoService, VideoDetails]
     })
     @View({
         template: require('./video-list.component.html'),
@@ -15,7 +15,7 @@ import {HTTP_PROVIDERS} from 'angular2/http';
 export class VideoList {
 
 //let's keep it dynamic for now
-public videos: any;
+public videos: Array<IVideo>;
 
     //getting the service for our videos component
     constructor(public videoService: VideoService) {
