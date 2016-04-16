@@ -10,7 +10,7 @@ console.log('`About` component loaded asynchronously');
 
 @Component({
     selector: 'about',
-    template: `david.r.niciforovic@gmail.com`
+    template: `This website is just an attempt to MEAN stack development learning. <br />Wish me luck!`
 })
 export class About {
     constructor() {
