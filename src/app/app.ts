@@ -1,7 +1,6 @@
 // ```
 // app.ts
-// (c) 2016 David Newman
-// blackshuriken@hotmail.com
+// (c) 2016 Jakub Szumiato
 // app.ts may be freely distributed under the MIT license
 // ```
 
@@ -24,7 +23,6 @@ import {NgFor} from 'angular2/common';
 // Import Todo component
 import {Todo} from './todo/todo.component';
 
-// Import Recipes component
 import {VideoListComponent} from './videos/videos';
 import {VideoDetailsComponent}  from './videos/videos';
 
@@ -39,32 +37,7 @@ import {VideoDetailsComponent}  from './videos/videos';
   pipes: [],
   // Load our main `Sass` file into our `app` `component`
   styleUrls: [require('!style!css!sass!../sass/main.scss')],
-  template: `
-  <header>
-    <nav>
-        <h1>Hello {{ name }}</h1>
-        <ul>
-            <li router-active>
-                <a [routerLink]=" ['Videos'] ">Videos</a>
-            </li>
-            <li router-active>
-                <a [routerLink]=" ['About'] ">About</a>
-            </li>
-        </ul>
-    </nav>
-</header>
-
-<main>
-    <router-outlet></router-outlet>
-</main>
-
-<footer>
-    .NET Videos
-    <div>
-        <img [src]="angularLogo" width="10%">
-    </div>
-</footer>
-  `
+  template: require('./app.html')
 })
 @RouteConfig([
   { path: '/', name: 'Videos', component: VideoListComponent, useAsDefault: true },
