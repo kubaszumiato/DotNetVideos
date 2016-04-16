@@ -100,7 +100,7 @@ call :SelectNodeVersion
 
 :: 3. Run gulp transformations
   pushd "%DEPLOYMENT_TARGET%"
-  call :ExecuteCmd .\npm run build
+  call :ExecuteCmd npm run build
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
