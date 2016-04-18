@@ -40,7 +40,7 @@ export class VideoListComponent {
             .subscribe((res) => {
 
                 // Populate our `todo` array with the `response` data
-                this.videos = res;
+                this.videos.push(res);
             });
     }
 
