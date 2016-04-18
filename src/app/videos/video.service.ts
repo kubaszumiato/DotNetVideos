@@ -19,17 +19,18 @@ export class VideoService {
 
     getEmptyVideo() {
         var result: IVideo = {
-            _id : '',
-        title : '',
-        url: '',
-        localUrl: '',
-        code: '',
-        mediaType: '',
-        videoLength:  0,
-        videoOrigin: VideoOrigin.YouTube,
-        tags: [],
-        rating:  0,
-        watchedCount: 0}
+            _id: '',
+            title: '',
+            url: '',
+            localUrl: '',
+            code: '',
+            mediaType: '',
+            videoLength: 0,
+            videoOrigin: VideoOrigin.YouTube,
+            tags: [],
+            rating: 0,
+            watchedCount: 0
+        }
 
         return result;
     }

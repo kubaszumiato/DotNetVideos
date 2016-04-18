@@ -1,41 +1,48 @@
- <div class="row border" *ngIf="videoDetails">
-     <div *ngIf="videoDetails" clas="col-md-12">
-         
-         You're just about to insert a movie with:
-             
-             title:  {{videoDetails.title}}  <br/>
-             length: {{videoDetails.videoLength}} <br />
-             rating: {{videoDetails.rating}} <br />
-             owner: {{videoDetails.owner}} <br />
-             watchedCount:  {{videoDetails.watchedCount}} <br />
-             url:  {{videoDetails.url}} <br />
-         
-     </div>
-     <form id="video-details-add" class="form">
-            <div class="col-md-2">
-                <label>Title: </label> <input placeholder="Title" [(ngModel)]="videoDetails.title"/>
-            </div>
-            <div class="col-md-2">
-                <label>videoLength: </label> <input placeholder="videoLength  " [(ngModel)]="videoDetails.videoLength"/>
-            </div>
-            <div class="col-md-2">
-                 <label>rating: </label> <input placeholder="rating  " [(ngModel)]="videoDetails.rating"/>
-            </div>
-            <div class="col-md-2">
-                <label>owher: </label> <input placeholder="owher  " [(ngModel)]="videoDetails.owher"/>
-            </div>
-            <div class="col-md-2">
-                <label>watchedCount: </label> <input placeholder="watchedCount  " [(ngModel)]="videoDetails.watchedCount"/>
-                
-            </div>
-            <div class="col-md-2">
-                <label>url: </label> <input placeholder="url  " [(ngModel)]="videoDetails.url"/>
-            </div>
-            <div class="col-md-2">
-                <a [href]="videoDetails.localUrl">Watch</a>
-            </div>
-            <div>
-                <button class="btn btn-warning" (click)="saveVideo(videoDetails)">Add </button>
-            </div>
-     </form>
+<div class="container">
+    <div *ngIf="videoDetails" clas="col-md-12">
+
+        You're just about to insert a movie with: title: {{videoDetails.title}} <br/> length: {{videoDetails.videoLength}}
+        <br /> rating: {{videoDetails.rating}} <br /> owner: {{videoDetails.owner}} <br /> watchedCount: {{videoDetails.watchedCount}}
+        <br /> url: {{videoDetails.url}} <br />
+
+    </div>
+    <form id="video-details-add">
+        <fieldset class="form-group">
+            <label for="videoDetailsTitle">Title: </label>
+            <input type="text" class="form-control" placeholder="Title" [(ngModel)]="videoDetails.title" id="videoDetailsTitle" />
+        </fieldset>
+
+        <fieldset class="form-group">
+            <label for="videoDetailsLength">Length: </label>
+            <input class="form-control" type="text" id="videoDetailsLength" placeholder="videoLength  " [(ngModel)]="videoDetails.videoLength" />
+        </fieldset>
+
+        <fieldset class="form-group">
+            <label>Rating: </label>
+            <input class="form-control" placeholder="rating" [(ngModel)]="videoDetails.rating" />
+        </fieldset>
+        
+        <fieldset class="form-group">
+            <label>Owner: </label>
+            <input class="form-control" placeholder="Owner" [(ngModel)]="videoDetails.owner" />
+        </fieldset>
+        
+        <fieldset class="form-group">
+            <label>Watched: </label>
+            <input class="form-control" placeholder="Watched" [(ngModel)]="videoDetails.watchedCount" />
+        </fieldset>
+
+        <fieldset class="form-group">
+            <label>url: </label>
+            <input class="form-control" placeholder="url  " [(ngModel)]="videoDetails.url" />
+        </fieldset>
+        
+        <fieldset class="form-group">
+            <a [href]="videoDetails.localUrl">Watch</a>
+        </fieldset>
+        <div>
+            <button class="btn btn-warning" (click)="saveVideo(videoDetails)">Add </button>
+        </div>
+    </form>
 </div>
+<!-- container -->

@@ -49,7 +49,7 @@ import {VideoDetailsComponent}  from './videos/videos';
   { path: '/about', name: 'About', loader: () => require('es6-promise!./about/about')('About') },
 ])
 export class App {
-  angularLogo = 'assets/img/angular-logo.png';
+  angularLogo = 'assets/img/netvideos-logo.png';
   name = '.NET Videos';
   url = 'https://twitter.com/jakubszumiato';
 
