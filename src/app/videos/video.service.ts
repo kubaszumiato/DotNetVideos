@@ -19,6 +19,7 @@ export class VideoService {
 
     getEmptyVideo() {
         var result: IVideo = {
+            _id : '',
         title : '',
         url: '',
         localUrl: '',
