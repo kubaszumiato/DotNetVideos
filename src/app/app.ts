@@ -51,6 +51,7 @@ import {VideoDetailsComponent}  from './videos/videos';
 export class App {
   angularLogo = 'assets/img/netvideos-logo.png';
   name = '.NET Videos';
+  description = 'Free website aggregating .NET videos from the internet';
   url = 'https://twitter.com/jakubszumiato';
 
   constructor() {

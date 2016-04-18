@@ -24,7 +24,7 @@ var PORT = process.env.PORT || 8080;
 var config = require('./config/config.json');
 
 var metadata = {
-  title: 'Angular 2 MEAN Webpack Starter Kit by @datatype_void',
+  title: '.NET Videos aggregation portal',
   baseUrl: '/',
   host: HOST,
   port: PORT,
