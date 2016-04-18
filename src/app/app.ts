@@ -43,6 +43,7 @@ import {VideoDetailsComponent}  from './videos/videos';
   { path: '/', name: 'Videos', component: VideoListComponent, useAsDefault: true },
   { path: '/home',  name: 'Videos',  component: VideoListComponent },
   { path: '/video/:id', name: 'Video', component: VideoDetailsComponent},
+  { path: '/video/', name: 'Add', component: VideoDetailsComponent},
   // Async load a component using Webpack's require with
   // es6-promise-loader and webpack `require`
   { path: '/about', name: 'About', loader: () => require('es6-promise!./about/about')('About') },

@@ -11,8 +11,6 @@
 // Note: MongoDB will autogenerate an _id for each Todo object created
 // Grab the Mongoose module and some references
 var mongoose = require('mongoose');
-//import User from '../user/user.model';
-// Create a `schema` for the `video` object
 var VideoSchema = new mongoose.Schema({
     title: { type: String },
     url: { type: String },

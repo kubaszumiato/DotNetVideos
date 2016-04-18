@@ -22,7 +22,7 @@ import {IVideo} from '../../../shared/data-models/video.model.interfaces';
 //import User from '../user/user.model';
 
 // Create a `schema` for the `video` object
-
+interface IVideoModel extends mongoose.Document, IVideo {}
 let VideoSchema = new mongoose.Schema({
   title: { type : String },
   url: { type : String},  
@@ -40,7 +40,7 @@ let VideoSchema = new mongoose.Schema({
 
 // Expose the model so that it can be imported and used in
 // the controller (to search, delete, etc.)
-export default mongoose.model<IVideo>('Video', VideoSchema);
+export default mongoose.model<IVideoModel>('Video', VideoSchema);
 
 
 

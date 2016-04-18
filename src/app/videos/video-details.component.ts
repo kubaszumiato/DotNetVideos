@@ -7,28 +7,34 @@ import {IVideo, VideoDisplayMode} from '../../../shared/data-models/video.model.
 
 @Component(
     {
-        selector: 'video-details'     ,
-        providers: [...HTTP_PROVIDERS, VideoService]   
+        selector: 'video-details',
+        providers: [...HTTP_PROVIDERS, VideoService]
     })
-    @View({
-      template: require('./video-details.component.html')  
-    })
-export class VideoDetailsComponent{
+@View({
+    template: require('./video-details.component.html')
+})
+export class VideoDetailsComponent {
     private id: String;
     public DisplayMode: VideoDisplayMode;
-    
-    constructor(params: RouteParams,
-    public videoService : VideoService) {
-        this.id = params.get('id');
-        this.videoService.getVideo(this.id).subscribe((res) => {
 
-                // Populate our `todo` array with the `response` data
+    constructor(params: RouteParams,
+        public videoService: VideoService) {
+        this.id = params.get('id');
+        if (this.id) {
+            this.videoService.getVideo(this.id).subscribe((res) => {
                 this.videoDetails = res;
             });
-        
-        
+        }
+        else {
+                this.videoDetails = this.videoService.getEmptyVideo();      
+        }
     }
-    
-   // @Input()
+    // @Input()
     public videoDetails: IVideo;
+    
+    public saveVideo(video: IVideo){
+        this.videoService.createVideo(video).subscribe((res) => {
+            this.videoDetails = res;
+        })
+    }
 }
