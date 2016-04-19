@@ -49,7 +49,8 @@ import {VideoDetailsComponent}  from './videos/videos';
   { path: '/about', name: 'About', loader: () => require('es6-promise!./about/about')('About') },
 ])
 export class App {
-  angularLogo = 'assets/img/netvideos-logo.png';
+  brandNavbar = 'assets/icon/android-icon-48x48.png';
+  brandFooter = 'assets/icon/android-icon-36x36.png';
   name = '.NET Videos';
   description = 'Free website aggregating .NET videos from the internet';
   url = 'https://twitter.com/jakubszumiato';

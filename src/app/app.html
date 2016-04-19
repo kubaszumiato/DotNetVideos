@@ -1,32 +1,38 @@
 <header>
-    <nav class="navbar navbar-light bg-faded">
-        <div class="nav navbar-nav">
-            <a class="nav-item nav-link active" router-active [routerLink]="['Videos']">Videos <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" router-active [routerLink]="['About']">About</a>
-            <a class="nav-item nav-link" router-active [routerLink]="['Add']">Add</a>
+    <div class="container">
+        <nav class="navbar navbar-default bg-faded">
+            <div class="navbar-header">
+                <div >
+                    <img class="navbar-brand" [src]="brandNavbar" />
+                    <a class="navbar-brand" router-active [routerLink]="['Videos']">.NET Videos</a>
+                </div>
+            </div>
+
+            <ul class="nav navbar-nav">
+                <li class="active"><a router-active [routerLink]="['Videos']">Videos <span class="sr-only">(current)</span></a></li>
+                <li><a router-active [routerLink]="['About']">About</a></li>
+                <li><a router-active [routerLink]="['Add']">Add</a></li>
+            </ul>
+        </nav>
+        <div class="jumbotron">
+            <h1 class="display-4">{{name}}</h1>
+            <p class="lead">This is a free website, aggregating .NET videos from different portals like YouTube, Channel9, Vimeo etc.</p>
+            <p>It has been created for the purpose of developers contest 'Daj się poznać'. It will remain open-source, hosted
+                on github.
+            </p>
+            <p class="lead">
+                <a class="btn btn-primary" href="https://github.com/kubaszumiato/DotNetVideos" role="button">Learn more</a>
+            </p>
         </div>
-    </nav>
-
-</header>
-    <div class="jumbotron">
-        <h1 class="display-3">{{name}}</h1>
-        <p class="lead">This is a free website, aggregating .NET videos from different portals like YouTube, Channel9, Vimeo etc.</p>
-        <hr class="m-y-2">
-        <p>It has been created for the purpose of developers contest 'Daj się poznać'. It will remain open-source, hosted on
-            github
-        </p>
-        <p class="lead">
-            <a class="btn btn-primary btn-lg" href="https://github.com/kubaszumiato/DotNetVideos" role="button">Learn more</a>
-        </p>
     </div>
-
+</header>
 <main>
     <router-outlet></router-outlet>
 </main>
 
 <footer>
-    {{name}}
-    <div>
-        <img [src]="angularLogo" width="10%">
+
+    <div class="text-center">
+        <img class="img-rounded" width="30px" height="25px" [src]="brandFooter" /> © Copyright 2016, {{name}}
     </div>
 </footer>

@@ -40,7 +40,7 @@
         <fieldset class="form-group">
             <a [href]="videoDetails.localUrl">Watch</a>
         </fieldset>
-        <div>
+        <div *ngIf="editMode">
             <button class="btn btn-warning" (click)="saveVideo(videoDetails)">Add </button>
         </div>
     </form>

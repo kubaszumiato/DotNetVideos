@@ -14,7 +14,7 @@ import {IVideo, VideoDisplayMode} from '../../../shared/data-models/video.model.
     template: require('./video-details.component.html')
 })
 export class VideoDetailsComponent {
-    private id: String;
+    private id: string;
     public DisplayMode: VideoDisplayMode;
 
     constructor(params: RouteParams,

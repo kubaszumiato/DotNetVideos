@@ -1,45 +1,18 @@
-<div>
-    <p>
-        Hello from Videos List component! Glad you're here. Let's try to print some videos:
-    </p>
-    <div class="container" *ngIf="videos">
+<div class="container" *ngIf="videos">
 
-        <div class="row border" *ngFor="#video of videos" >
-            <div visibility=""></div>
-            <!-- row: left hand side -->
-            <div class="col-md-2" (click)="onVideoSelected(video)">
-                <img [src]="video.thumbUrl" />
-            </div>
-            <!-- row: right hand side -->
-            <div class="col-md-10">
-                <!-- top -->
-                <div class = "row h3">
-                        <a [href]="video.localUrl">  {{video.title}} </a>                 
-                </div>
-                <!-- bottom -->
-                <div class = "row">
-                    <div class="col-md-2">
-                        Length: {{video.length}}
-                    </div>
-                    <div class="col-md-2">
-                        Rating: {{video.rating}}
-                    </div>
-                    <div class="col-md-2">
-                        Owner: {{video.owner}}
-                    </div>
-                    <div class="col-md-2">
-                        Watched: {{video.watchedCount}}
-                    </div>
-                    <div class="col-md-4">
-                        Url: {{video.url}}
-                    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-3" (click)="onVideoSelected(video)" *ngFor=" #video of videos ">
+            <div class="thumbnail">
+                <img *ngIf="video.thumbUrl" [src]="video.thumbUrl" />
+                <div class="caption">
+                    <h3>{{video.title}}</h3>
+                    <p>Length: {{video.length}}</p>
+                    <p>Watched: {{video.watchedCount}}</p>
+                    <p>Rating: {{video.rating}}</p>
+                    <p><a [href]="video.localUrl" class="btn btn-primary" role="button">Watch</a> <a [href]="video.url" class="btn btn-default"
+                            role="button">Watch</a></p>
                 </div>
             </div>
         </div>
-        <!--<div class="container" *ngIf="selectedVideo">
-            <video-details //[videoDetails] ="selectedVideo">
-            </video-details>
-        </div>-->
-
     </div>
 </div>
