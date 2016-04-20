@@ -19,7 +19,7 @@ import {VideoDetailsComponent} from './video-details.component';
 // })
 export class VideoListComponent {
 
-  
+
     public videos: Array<IVideo>;
     public selectedVideo: IVideo;
 
@@ -27,26 +27,31 @@ export class VideoListComponent {
     constructor(
         private _router: Router,
         public videoService: VideoService) {
+        this.videos = [];
         videoService.getVideos()
             .subscribe((res) => {
-                this.videos = res;
+                res.forEach(vid => {
+                    if (this.videoService.validateVideo(vid)) {
+                        this.videos.push(vid);
+                    }
+                    else {
+                        console.log('Invalid video data received from the db: ' + vid._id);
+                    }
+                })
             });
-
     }
 
     createVideo() {
 
         this.videoService.createVideo({ title: "exampleTitle" })
             .subscribe((res) => {
-
-                // Populate our `todo` array with the `response` data
                 this.videos.push(res);
             });
     }
 
     onVideoSelected(selection: IVideo) {
         this.selectedVideo = selection;
-        this._router.navigate( ['Video', { id: selection._id }] );
+        this._router.navigate(['Video', { id: selection._id }]);
     }
 
 
