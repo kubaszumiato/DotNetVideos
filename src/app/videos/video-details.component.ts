@@ -22,11 +22,18 @@ export class VideoDetailsComponent {
         this.id = params.get('id');
         if (this.id) {
             this.videoService.getVideo(this.id).subscribe((res) => {
+                console.log('im in non-empty Id: '+this.id);
+                console.log('result is:');
+                console.log(res);
                 this.videoDetails = res;
             });
         }
         else {
-                this.videoDetails = this.videoService.getEmptyVideo();      
+            console.log('im in empty Id: '+this.id);
+                console.log('result is:');
+         
+                this.videoDetails = this.videoService.getEmptyVideo();     
+                console.log(this.videoDetails); 
         }
     }
     // @Input()

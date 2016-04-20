@@ -1,12 +1,5 @@
-<div class="container">
-    <div *ngIf="videoDetails" clas="col-md-12">
-
-        You're just about to insert a movie with: title: {{videoDetails.title}} <br/> length: {{videoDetails.videoLength}}
-        <br /> rating: {{videoDetails.rating}} <br /> owner: {{videoDetails.owner}} <br /> watchedCount: {{videoDetails.watchedCount}}
-        <br /> url: {{videoDetails.url}} <br />
-
-    </div>
-    <form id="video-details-add">
+<div class="container">    
+    <form id="video-details-add" *ngIf="videoDetails">
         <fieldset class="form-group">
             <label for="videoDetailsTitle">Title: </label>
             <input type="text" class="form-control" placeholder="Title" [(ngModel)]="videoDetails.title" id="videoDetailsTitle" />
