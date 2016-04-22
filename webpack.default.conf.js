@@ -10,7 +10,7 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     sourceMapFilename: '[name].map',
-    chunkFilename: '[id].chunk.js'
+    chunkFilename: '[id].chunk.js'  
   },
   module: {
     noParse: [
