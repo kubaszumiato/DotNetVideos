@@ -1,5 +1,5 @@
 <div class="container">    
-    <form id="video-details-add" *ngIf="videoDetails">
+    <form id="video-details-add" *ngIf="videoDetails" [ngFormModel]="form">
         <fieldset class="form-group">
             <label for="videoDetailsTitle">Title: </label>
             <input type="text" class="form-control" placeholder="Title" [(ngModel)]="videoDetails.title" id="videoDetailsTitle" />

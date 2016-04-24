@@ -35,7 +35,7 @@ export class VideoListComponent {
                         this.videos.push(vid);
                     }
                     else {
-                        console.log('Invalid video data received from the db: ' + vid._id);
+                        console.log('Invalid video data received from the db: ' + vid.id);
                     }
                 })
             });
@@ -51,7 +51,7 @@ export class VideoListComponent {
 
     onVideoSelected(selection: IVideo) {
         this.selectedVideo = selection;
-        this._router.navigate(['Video', { id: selection._id }]);
+        this._router.navigate(['Video', { id: selection.id }]);
     }
 
 
