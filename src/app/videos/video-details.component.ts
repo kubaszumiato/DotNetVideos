@@ -22,7 +22,7 @@ export class VideoDetailsComponent {
         this.id = params.get('id');
         if (this.id) {
             this.videoService.getVideo(this.id).subscribe((res) => {
-;                this.videoDetails = res;
+                this.videoDetails = res;
             });
         }
         else {         
