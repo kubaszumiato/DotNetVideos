@@ -15,26 +15,33 @@ import {IVideo, VideoDisplayMode} from '../../../shared/data-models/video.model.
 })
 export class VideoDetailsComponent {
     private id: string;
-    public DisplayMode: VideoDisplayMode;
+    public DisplayMode: VideoDisplayMode = VideoDisplayMode.Read;
 
-    constructor(params: RouteParams,
+    constructor(private _params: RouteParams,
         public videoService: VideoService) {
-        this.id = params.get('id');
-        if (this.id) {
+        let id = _params.get('id');
+        if (id) {
             this.videoService.getVideo(this.id).subscribe((res) => {
                 this.videoDetails = res;
             });
         }
-        else {         
-                this.videoDetails = this.videoService.getEmptyVideo(); 
+        else {
+            this.videoDetails = this.videoService.getEmptyVideo();
         }
+
+        // let mode = _params.get('mode');
+        // this.DisplayMode = mode ? VideoDisplayMode.Edit : VideoDisplayMode.Read;
     }
     // @Input()
     public videoDetails: IVideo;
-    
-    public saveVideo(video: IVideo){
+
+    public saveVideo(video: IVideo) {
         this.videoService.createVideo(video).subscribe((res) => {
             this.videoDetails = res;
         })
+    }
+
+    editMode(): void {
+        this.DisplayMode = VideoDisplayMode.Edit;
     }
 }

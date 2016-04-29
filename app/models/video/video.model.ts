@@ -23,6 +23,7 @@ import {IVideo} from '../../../shared/data-models/video.model.interfaces';
 
 // Create a `schema` for the `video` object
 interface IVideoModel extends mongoose.Document, IVideo {}
+
 let VideoSchema = new mongoose.Schema({
   title: { type : String },
   url: { type : String},  
@@ -36,6 +37,15 @@ let VideoSchema = new mongoose.Schema({
   owner: { type : String },
   watchedCount: { type : Number}
  
+});
+// Duplicate the ID field.
+VideoSchema.virtual('id').get(function(){
+    return this._id.toHexString();
+});
+
+// Ensure virtual fields are serialised.
+VideoSchema.set('toJSON', {
+    virtuals: true
 });
 
 // Expose the model so that it can be imported and used in

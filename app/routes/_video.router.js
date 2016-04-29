@@ -66,7 +66,9 @@ export default (app, router) => {
           res.send(err);
 
         else
-          res.json(video);
+          {
+            res.json(video);
+          }
        });
       
     });

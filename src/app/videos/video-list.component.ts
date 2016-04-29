@@ -1,5 +1,5 @@
 //ng2
-import {Component, Injectable} from 'angular2/core'; //View
+import {Component, Injectable, OnInit} from 'angular2/core'; //View
 import {NgFor} from 'angular2/common';
 import {HTTP_PROVIDERS} from 'angular2/http';
 import {Router} from 'angular2/router';
@@ -17,40 +17,54 @@ import {VideoDetailsComponent} from './video-details.component';
 // @View({
 //     template: require('./video-list.component.html'),
 // })
-export class VideoListComponent {
+export class VideoListComponent //implements OnInit 
+{
 
-
-    public videos: Array<IVideo>;
+    public videos: Array<IVideo> = [];
     public selectedVideo: IVideo;
+    
+    // ngOnInit(): void {
+
+       
+    // }
+
+
 
     //getting the service for our videos component
     constructor(
         private _router: Router,
-        public videoService: VideoService) {
-        this.videos = [];
-        videoService.getVideos()
-            .subscribe((res) => {
-                res.forEach(vid => {
-                    if (this.videoService.validateVideo(vid)) {
-                        this.videos.push(vid);
-                    }
-                    else {
-                        console.log('Invalid video data received from the db: ' + vid.id);
-                    }
-                })
-            });
-    }
+        private _videoService: VideoService) { 
+            
+             this._videoService.getVideos()
+            .subscribe(
+            res => this.videos.push(res),
+            // {
+            //     res.forEach(vid => {
+            //         if (this._videoService.validateVideo(vid)) {
+            //             this.videos.push(vid);
+            //         }
+            //         else {
+            //             console.log('Invalid video data received from the db: ' + vid.id);
+            //         }
+            //     })
+
+            // },
+            error => console.log(error)
+            );
+        }
 
     createVideo() {
 
-        this.videoService.createVideo({ title: "exampleTitle" })
+        this._videoService.createVideo({ title: "exampleTitle" })
             .subscribe((res) => {
                 this.videos.push(res);
             });
     }
 
+    //from-code approach
     onVideoSelected(selection: IVideo) {
         this.selectedVideo = selection;
+        console.log('selected video with id: ' + selection.id);
         this._router.navigate(['Video', { id: selection.id }]);
     }
 

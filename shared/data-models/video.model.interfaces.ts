@@ -4,6 +4,8 @@ import {VideoOrigin} from '../../app/models/video/video.enums';
 import User from '../../app/models/user/user.model';
 
 export interface IVideo {
+  //mongoose id?
+ // _id?: any;
   //id for the already saved entity
   id?: string,
   //each video has some title which is displayed first ot the user

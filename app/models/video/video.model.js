@@ -24,6 +24,14 @@ var VideoSchema = new mongoose.Schema({
     owner: { type: String },
     watchedCount: { type: Number }
 });
+// Duplicate the ID field.
+VideoSchema.virtual('id').get(function () {
+    return this._id.toHexString();
+});
+// Ensure virtual fields are serialised.
+VideoSchema.set('toJSON', {
+    virtuals: true
+});
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = mongoose.model('Video', VideoSchema);
 //export default mongoose.model('Video', VideoSchema);

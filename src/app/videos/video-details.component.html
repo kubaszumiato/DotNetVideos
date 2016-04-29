@@ -1,5 +1,6 @@
 <div class="container">    
-    <form id="video-details-add" *ngIf="videoDetails" [ngFormModel]="form">
+    <form id="video-details-add" *ngIf="videoDetails">
+         <!--[ngFormModel]="form">-->
         <fieldset class="form-group">
             <label for="videoDetailsTitle">Title: </label>
             <input type="text" class="form-control" placeholder="Title" [(ngModel)]="videoDetails.title" id="videoDetailsTitle" />
@@ -8,6 +9,8 @@
         <fieldset class="form-group">
             <label for="videoDetailsLength">Length: </label>
             <input class="form-control" type="text" id="videoDetailsLength" placeholder="videoLength  " [(ngModel)]="videoDetails.videoLength" />
+            <!--<label *ngIf="DisplayMode===VideoDisplayMode.Edit">{{videoDetails.videoLength}}</label>-->
+            <!--<button class="btn" (click)="editLength()">...</button>-->
         </fieldset>
 
         <fieldset class="form-group">

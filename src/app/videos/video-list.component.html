@@ -5,7 +5,11 @@
             <div class="thumbnail">
                 <img *ngIf="video.thumbUrl" [src]="video.thumbUrl" />
                 <div class="caption">
-                    <h3>{{video.title}}</h3>
+                    <h3>
+                        <!--<a [routerLink] = "['Video', {id: video._id}]">-->
+                        {{video.title}}
+                        <!--</a>-->
+                        </h3>
                     <p>Length: {{video.length}}</p>
                     <p>Watched: {{video.watchedCount}}</p>
                     <p>Rating: {{video.rating}}</p>
