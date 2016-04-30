@@ -3,80 +3,63 @@
 // ```
 // video.model.js
 // (c) 2016 Jakub Szumiato
-// kuba.szumiato@gmail.com
-// video.model.js may be freely distributed under the MIT license
+// jakub@szumiato.pl
+// video.model.(j)ts may be freely distributed under the MIT license
 // ```
-
-// */app/models/video.model.js*
 
 // ## Video Model
 
-// Note: MongoDB will autogenerate an _id for each Todo object created
+// Note: MongoDB will autogenerate an _id for each Video object created
 
-// Grab the Mongoose module and some references
 
 import mongoose = require('mongoose');
 import { Tag } from './video.tag';
 import { VideoOrigin } from './video.enums';
 import {IVideo} from '../../../shared/data-models/video.model.interfaces';
-//import User from '../user/user.model';
+import User from '../user/user.model';
 
-// Create a `schema` for the `video` object
+// Create interface for mongoose document of the `video` collection
 interface IVideoModel extends mongoose.Document, IVideo {}
 
-let VideoSchema = new mongoose.Schema({
-  title: { type : String },
-  url: { type : String},  
-  localUrl: { type : String},
-  code: { type : String},
-  mediaType: { type : String},  
-  videoLength: { type : Number},  
-  videoOrigin: { type : String},
-  tags: { type : Array},  
-  rating: { type : Number},
-  owner: { type : String },
-  watchedCount: { type : Number}
- 
-});
+// Create the schema class for the video collection
+class VideoSchema extends mongoose.Schema implements IVideo {
+  //id for the entity
+  id: string;
+  //each video has some title which is displayed first ot the user
+  title: string;
+  //each video must have an Url, whatever the place of publication
+  url: string;
+  //each video will have also it's url on dotnetvideos website
+  localUrl: string;
+  //code defines the unique identifier of a movie within a given website; usually it's a part of URL
+  code: string;
+  //mediaType describes what kind of movie is that (what type of file preciesly speaking)
+  mediaType: string;  
+  //length in seconds
+  videoLength: number;  
+  //videoType declares the website the movie is coming from; eg. YouTube
+  videoOrigin: VideoOrigin;
+  //tags for movies; assigned by movie creator/importer
+  tags: Tag | Array<Tag>;    
+  //internal rating by dotnet-videos users
+  rating: number;  
+  //who uploaded the movie [optional]
+  owner: User;
+  //we'd also like to know the watch count
+  watchedCount:  number;
+}
+let videoSchema = new VideoSchema();
+
 // Duplicate the ID field.
-VideoSchema.virtual('id').get(function(){
+videoSchema.virtual('id').get(function(){
     return this._id.toHexString();
 });
 
 // Ensure virtual fields are serialised.
-VideoSchema.set('toJSON', {
+videoSchema.set('toJSON', {
     virtuals: true
 });
 
 // Expose the model so that it can be imported and used in
 // the controller (to search, delete, etc.)
-export default mongoose.model<IVideoModel>('Video', VideoSchema);
-
-
-
-//export default mongoose.model('Video', VideoSchema);
-// import mongoose from 'mongoose';
-
-// // Create a `schema` for the `Todo` object
-// let todoSchema = new mongoose.Schema({
-//   text: { type : String }
-// });
-
-// // Expose the model so that it can be imported and used in
-// // the controller (to search, delete, etc.)
-// export default mongoose.model('Todo', todoSchema);
-
-
-///this works fine on the js level
-// var mongoose = require('mongoose');
-// let VideoSchema = new mongoose.Schema({
-//     title: { type: String },
-//     url: { type: String },
-//     code: { type: String },
-//     mediaType: { type: String },
-//     length: { type: Number },
-//     rating: { type: Number },
-// });
-// // Expose the model so that it can be imported and used in
-// // the controller (to search, delete, etc.)
-// export default mongoose.model('Video', VideoSchema);
+export default mongoose.model<IVideoModel>('Video', videoSchema);

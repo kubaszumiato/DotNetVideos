@@ -19,7 +19,7 @@
 
 // Load the video model
 import Video from '../models/video/video.model';
-
+import mongoose from 'mongoose';
 export default (app, router) => {
 
   // ### video API Routes
@@ -79,9 +79,10 @@ export default (app, router) => {
 
     // Accessed at GET http://localhost:8080/api/video/:video_id
     .get((req, res) => {
-
+      
       // Use mongoose to a single video item by id in the database
-      Video.findOne(req.params.video_id, (err, video) => {
+      Video.findOne({"_id" : req.params.video_id}, (err, video) => {
+
 
         if(err)
           res.send(err);

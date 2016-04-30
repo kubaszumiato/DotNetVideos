@@ -14,14 +14,13 @@ import {IVideo, VideoDisplayMode} from '../../../shared/data-models/video.model.
     template: require('./video-details.component.html')
 })
 export class VideoDetailsComponent {
-    private id: string;
     public DisplayMode: VideoDisplayMode = VideoDisplayMode.Read;
 
     constructor(private _params: RouteParams,
         public videoService: VideoService) {
         let id = _params.get('id');
         if (id) {
-            this.videoService.getVideo(this.id).subscribe((res) => {
+            this.videoService.getVideo(id).subscribe((res) => {
                 this.videoDetails = res;
             });
         }
