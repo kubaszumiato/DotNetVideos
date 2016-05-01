@@ -1,6 +1,6 @@
-<div class="container">    
-    <form id="video-details-add" *ngIf="videoDetails">
-         <!--[ngFormModel]="form">-->
+<div class="container">
+    <form id="video-details-add" *ngIf="videoDetails" 
+        [ngFormModel]="videoForm" (ngSubmit)="submitForm(videoForm.Value)">
         <fieldset class="form-group">
             <label for="videoDetailsTitle">Title: </label>
             <input type="text" class="form-control" placeholder="Title" [(ngModel)]="videoDetails.title" id="videoDetailsTitle" />
@@ -8,7 +8,8 @@
 
         <fieldset class="form-group">
             <label for="videoDetailsLength">Length: </label>
-            <input class="form-control" type="text" id="videoDetailsLength" placeholder="videoLength  " [(ngModel)]="videoDetails.videoLength" />
+            <input class="form-control" type="text" id="videoDetailsLength" placeholder="videoLength  " [(ngModel)]="videoDetails.videoLength"
+            />
             <!--<label *ngIf="DisplayMode===VideoDisplayMode.Edit">{{videoDetails.videoLength}}</label>-->
             <!--<button class="btn" (click)="editLength()">...</button>-->
         </fieldset>
@@ -17,12 +18,12 @@
             <label>Rating: </label>
             <input class="form-control" placeholder="rating" [(ngModel)]="videoDetails.rating" />
         </fieldset>
-        
+
         <fieldset class="form-group">
             <label>Owner: </label>
             <input class="form-control" placeholder="Owner" [(ngModel)]="videoDetails.owner" />
         </fieldset>
-        
+
         <fieldset class="form-group">
             <label>Watched: </label>
             <input class="form-control" placeholder="Watched" [(ngModel)]="videoDetails.watchedCount" />
@@ -32,7 +33,7 @@
             <label>url: </label>
             <input class="form-control" placeholder="url  " [(ngModel)]="videoDetails.url" />
         </fieldset>
-        
+
         <fieldset class="form-group">
             <a [href]="videoDetails.localUrl">Watch</a>
         </fieldset>

@@ -1,6 +1,7 @@
 import {Component, View, Injectable, Input} from 'angular2/core';
+import {FORM_DIRECTIVES, FormBuilder, ControlGroup} from 'angular2/common';
+
 import {RouteParams} from 'angular2/router';
-import {HTTP_PROVIDERS} from 'angular2/http';
 
 import {VideoService} from './video.service';
 import {IVideo, VideoDisplayMode} from '../../../shared/data-models/video.model.interfaces';
@@ -8,16 +9,20 @@ import {IVideo, VideoDisplayMode} from '../../../shared/data-models/video.model.
 @Component(
     {
         selector: 'video-details',
-        providers: [...HTTP_PROVIDERS, VideoService]
+        providers: [VideoService] //[...HTTP_PROVIDERS, 
     })
 @View({
     template: require('./video-details.component.html')
 })
 export class VideoDetailsComponent {
+    videoForm: ControlGroup;
     public DisplayMode: VideoDisplayMode = VideoDisplayMode.Read;
 
-    constructor(private _params: RouteParams,
-        public videoService: VideoService) {
+    constructor(
+            private fb: FormBuilder,
+            private _params: RouteParams,
+            public videoService: VideoService) {
+        this.videoForm = fb.group({}); 
         let id = _params.get('id');
         if (id) {
             this.videoService.getVideo(id).subscribe((res) => {
@@ -42,5 +47,9 @@ export class VideoDetailsComponent {
 
     editMode(): void {
         this.DisplayMode = VideoDisplayMode.Edit;
+    }
+    
+    submitForm(value: string): void {
+        console.log('submitted: ' + value);
     }
 }
