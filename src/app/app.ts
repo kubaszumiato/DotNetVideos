@@ -20,11 +20,8 @@ import {Home} from './home/home';
 // Import NgFor directive
 import {NgFor} from 'angular2/common';
 
-// Import Todo component
-import {Todo} from './todo/todo.component';
-
-import {VideoListComponent} from './videos/videos';
-import {VideoDetailsComponent}  from './videos/videos';
+// Videos Component
+import {VideoListComponent, VideoDetailsComponent} from './videos/videos.components';
 
 /*
  * App Component

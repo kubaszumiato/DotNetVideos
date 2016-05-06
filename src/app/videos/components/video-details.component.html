@@ -1,0 +1,40 @@
+<div class="container">
+    <form id="video-details-add" *ngIf="videoDetails" 
+    [ngFormModel]="videoForm" (ngSubmit)="submitForm()">
+        <fieldset class="form-group">
+            <label for="videoDetailsTitle">Title: </label>
+            <input type="text" class="form-control" 
+            placeholder="Title" [(ngModel)]="videoDetails.title" 
+            [ngFormControl]="videoForm.find('title')"
+                id="videoDetailsTitle" />
+            <span *ngIf="!videoForm.controls.title?.valid">
+        The title is required!
+    </span>
+        </fieldset>
+        <fieldset class="form-group">
+            <label>Rating: </label>
+            <input class="form-control" placeholder="rating" [(ngModel)]="videoDetails.rating" 
+            [ngFormControl]="videoForm.find('rating')"
+            />
+            <span *ngIf="!videoForm.controls.rating?.valid">
+        The rating must be between 0 and 5!
+    </span>
+        </fieldset>
+        <fieldset class="form-group">
+            <label>url: </label>
+            <input class="form-control" placeholder="url" [(ngModel)]="videoDetails.url" 
+            [ngFormControl]="videoForm.find('url')" />
+            <!--<ul *ngIf="!videoForm.controls.url?.valid">
+                The URL is invalid. Possible issues:<br />
+                <li *ngIf="videoForm.controls.url?.emptyUrl">
+                    The URL cannot be empty
+                </li>
+                <li *ngIf="videoForm.controls.url?.invalidUrl">
+                    The URL format was not recognized by the system.
+                </li>
+            </ul>-->
+        </fieldset>
+
+        <button type="submit" class="ui button">Submit</button>
+    </form>
+</div>

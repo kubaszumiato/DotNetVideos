@@ -4,11 +4,6 @@ import {FORM_DIRECTIVES} from 'angular2/common';
 import {Title} from './services/title';
 import {XLarge} from './directives/x-large';
 
-import {Accordion} from '../shared/components/accordion/accordion.component';
-
-import {AccordionGroup} from
-  '../shared/components/accordion/accordion-group.component';
-
 // Import NgFor directive
 import {NgFor} from 'angular2/common';
 
@@ -25,8 +20,6 @@ import {NgFor} from 'angular2/common';
   // Doing so will allow Angular to attach our behavior to an element
   directives: [
       XLarge,
-      Accordion,
-      AccordionGroup,
       NgFor
   ],
   // We need to tell Angular's compiler which custom pipes are in our template.

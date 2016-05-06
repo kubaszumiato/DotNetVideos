@@ -1,4 +1,3 @@
-import mongoose = require ('mongoose');
 import {Tag} from '../../app/models/video/video.tag';
 import {VideoOrigin} from '../../app/models/video/video.enums';
 import User from '../../app/models/user/user.model';

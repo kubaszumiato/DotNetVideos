@@ -1,7 +1,9 @@
 enum VideoOrigin {
+    Unknown = 0,
     YouTube = 1,
     Vimeo,
     Channel9,
+    
 }
 
 export {VideoOrigin};
