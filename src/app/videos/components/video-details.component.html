@@ -1,6 +1,6 @@
 <div class="container">
-    <form id="video-details-add" *ngIf="videoDetails" 
-    [ngFormModel]="videoForm" (ngSubmit)="submitForm()">
+    <form [ngFormModel]="videoForm" id="video-details-add" *ngIf="videoDetails" 
+     (ngSubmit)="submitForm()">
         <fieldset class="form-group">
             <label for="videoDetailsTitle">Title: </label>
             <input type="text" class="form-control" 
@@ -24,7 +24,7 @@
             <label>url: </label>
             <input class="form-control" placeholder="url" [(ngModel)]="videoDetails.url" 
             [ngFormControl]="videoForm.find('url')" />
-            <!--<ul *ngIf="!videoForm.controls.url?.valid">
+            <ul *ngIf="!videoForm.controls.url?.valid">
                 The URL is invalid. Possible issues:<br />
                 <li *ngIf="videoForm.controls.url?.emptyUrl">
                     The URL cannot be empty
@@ -32,7 +32,7 @@
                 <li *ngIf="videoForm.controls.url?.invalidUrl">
                     The URL format was not recognized by the system.
                 </li>
-            </ul>-->
+            </ul>
         </fieldset>
 
         <button type="submit" class="ui button">Submit</button>

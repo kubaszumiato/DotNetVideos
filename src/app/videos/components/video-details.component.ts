@@ -14,24 +14,13 @@ import {IVideo, VideoDisplayMode, VideoOrigin} from '../../../../shared/data-mod
     })
 
 
-export class VideoDetailsComponent implements OnInit {
+export class VideoDetailsComponent {// implements OnInit {
     videoDetails: IVideo;
     videoForm: ControlGroup;
     formBuilder: FormBuilder;
-    public DisplayMode: VideoDisplayMode = VideoDisplayMode.Read;
+    //public DisplayMode: VideoDisplayMode = VideoDisplayMode.Read;
     
-    ngOnInit(): void {
-        // this.videoForm = new ControlGroup( {
-        //     //control for the movie title, required value
-        //     title: new Control('', Validators.required),
-        //     //control for rating. Specific validator
-        //     rating: new Control('', VideoValidationService.ratingValidator),
-
-        //     //url of the video, required value
-        //     url: new Control('', VideoValidationService.urlValidator)
-        // });
-        
-    }  
+  //  ngOnInit(): void {     }  
     constructor(
         private fb: FormBuilder,
         private _params: RouteParams,
@@ -39,17 +28,7 @@ export class VideoDetailsComponent implements OnInit {
         public validationService: VideoValidationService) {
             
         this.getVideo(); 
-        // this.formBuilder = fb;  
-        this.videoForm = this.getVideoForm(fb);            
-        // this.videoForm = this.formBuilder.group({
-        //     //control for the movie title, required value
-        //     'title': ['', Validators.required],
-        //     //control for rating. Specific validator
-        //     'rating': ['', validationService.ratingValidator],
-
-        //     //url of the video, required value
-        //     'url': ['', validationService.urlValidator]
-        // });
+        this.videoForm = this.getVideoForm(fb);
     }
 
     getVideo() {
@@ -66,8 +45,7 @@ export class VideoDetailsComponent implements OnInit {
     }
 
 
-    public saveVideo() {
-        
+    public saveVideo() {        
         this.videoService.createVideo(this.videoDetails).subscribe(
             (res) => { 
                 this.videoDetails = res;
@@ -76,12 +54,12 @@ export class VideoDetailsComponent implements OnInit {
             (error) => console.log('error on saving video'));
     }
 
-    editMode(): void {
-        this.DisplayMode = VideoDisplayMode.Edit;
-    }
+    // editMode(): void {
+    //     this.DisplayMode = VideoDisplayMode.Edit;
+    // }
 
-    submitForm(value: string): void {
-        console.log('submitted: ' + value);
+    submitForm(): void {
+        console.log('submitted: ' + this.videoForm);
     }
 
     //where to put this?
@@ -96,24 +74,14 @@ export class VideoDetailsComponent implements OnInit {
             //url of the video, required value
             'url': ['', VideoValidationService.urlValidator]
         });
-
-        // fb.group({
-        //     //control for the movie title, required value
-        //     'title': ['', Validators.required],
-        //     //control for rating. Specific validator
-        //     'rating': ['', this.ratingValidator],
-
-        //     //url of the video, required value
-        //     'url': ['', Validators.required, this.urlValidator]
-        // });
-        
+                
         result.controls['url'].valueChanges.subscribe(
             (value: string) => {
                 console.log('url changed to: ' + value);
             });
         result.valueChanges.subscribe(
-            (value: string) => {
-                console.log('form changed to: ' + value);
+            (value: ControlGroup) => {
+                console.log('form changed to: ' + value.value);
             });
         return result;
     }    

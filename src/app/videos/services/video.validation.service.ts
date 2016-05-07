@@ -60,15 +60,16 @@ export class VideoValidationService {
     }
 
 
+    //why this has to be static?
     static recognizeVideoByUrl(url: string): VideoOrigin {
         //http://stackoverflow.com/questions/5830387/how-to-find-all-youtube-video-ids-in-a-string-using-a-regex/5831191#5831191
         let ytUrlRegExp: RegExp = /https?:\/\/(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube(?:-nocookie)?\.com\S*?[^\w\s-])([\w-]{11})(?=[^\w-]|$)(?![?=&+%\w.-]*(?:['"][^<>]*>|<\/a>))[?=&+%\w.-]*/ig;
 
         //http://stackoverflow.com/questions/13286785/get-video-id-from-vimeo-url
-        let vmUrlRegExp: RegExp = /https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/;
+        let vmUrlRegExp: RegExp = /(https?:\/\/)?(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/;
 
         //#todo
-        let ch9UrlRegExp: RegExp = /http?/;
+        //let ch9UrlRegExp: RegExp = /http?/;
 
         if (url.match(ytUrlRegExp)) {
             console.log('youtube url matched');
@@ -78,10 +79,10 @@ export class VideoValidationService {
             console.log('vimeo url matched');            
             return VideoOrigin.Vimeo;
         }
-        if (url.match(ch9UrlRegExp)) {
-            console.log('channel9 url matched');            
-            return VideoOrigin.Channel9;
-        }
+        // if (url.match(ch9UrlRegExp)) {
+        //     console.log('channel9 url matched');            
+        //     return VideoOrigin.Channel9;
+        // }
         return VideoOrigin.Unknown;
     }
 }
