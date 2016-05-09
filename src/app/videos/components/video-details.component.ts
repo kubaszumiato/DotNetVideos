@@ -1,13 +1,14 @@
 import {Component, Injectable, Input, OnInit} from 'angular2/core';
 import {FORM_DIRECTIVES, FormBuilder, ControlGroup, AbstractControl, Control, Validators} from 'angular2/common';
 import {RouteParams} from 'angular2/router';
-
+import {EnumKeysPipe} from '../../\shared/pipes/enum.keys.pipe';
 import {VideoService, VideoValidationService} from '../video.services';
-import {IVideo, VideoDisplayMode, VideoOrigin} from '../../../../shared/data-models/video.model.interfaces';
+import {IVideo, VideoDisplayMode, VideoOriginEnum} from '../../../../shared/data-models/video.model.interfaces';
 
 @Component(
     {
         selector: 'video-details',
+        pipes: [EnumKeysPipe],
         providers: [VideoService, VideoValidationService],
 
         template: require('./video-details.component.html')
@@ -18,6 +19,7 @@ export class VideoDetailsComponent {// implements OnInit {
     videoDetails: IVideo;
     videoForm: ControlGroup;
     formBuilder: FormBuilder;
+    videoOrigins = VideoOriginEnum;
     //public DisplayMode: VideoDisplayMode = VideoDisplayMode.Read;
     
   //  ngOnInit(): void {     }  
@@ -45,7 +47,7 @@ export class VideoDetailsComponent {// implements OnInit {
     }
 
 
-    public saveVideo() {        
+    public saveVideo(value: any) {        
         this.videoService.createVideo(this.videoDetails).subscribe(
             (res) => { 
                 this.videoDetails = res;
@@ -70,14 +72,16 @@ export class VideoDetailsComponent {// implements OnInit {
             'title': ['', Validators.required],
             //control for rating. Specific validator
             'rating': ['', VideoValidationService.ratingValidator],
-
+            //video origin/source (YouTube, Vimeo, Channel9)
+            'videoOrigin': [''],
             //url of the video, required value
             'url': ['', VideoValidationService.urlValidator]
         });
                 
         result.controls['url'].valueChanges.subscribe(
-            (value: string) => {
-                console.log('url changed to: ' + value);
+            (
+                value: string) => {
+                result.controls['videoOrigin']
             });
         result.valueChanges.subscribe(
             (value: ControlGroup) => {

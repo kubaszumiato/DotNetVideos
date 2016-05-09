@@ -14,7 +14,7 @@
 
 import mongoose = require('mongoose');
 import { Tag } from './video.tag';
-import { VideoOrigin } from './video.enums';
+import { VideoOriginEnum } from './video.enums';
 import {IVideo} from '../../../shared/data-models/video.model.interfaces';
 import User from '../user/user.model';
 
@@ -38,7 +38,7 @@ class VideoSchema extends mongoose.Schema implements IVideo {
   //length in seconds
   videoLength: number;  
   //videoType declares the website the movie is coming from; eg. YouTube
-  videoOrigin: VideoOrigin;
+  videoOrigin: VideoOriginEnum;
   //tags for movies; assigned by movie creator/importer
   tags: Tag | Array<Tag>;    
   //internal rating by dotnet-videos users

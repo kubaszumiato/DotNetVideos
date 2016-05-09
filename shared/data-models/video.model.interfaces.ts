@@ -1,5 +1,5 @@
 import {Tag} from '../../app/models/video/video.tag';
-import {VideoOrigin} from '../../app/models/video/video.enums';
+import {VideoOriginEnum} from '../../app/models/video/video.enums';
 import User from '../../app/models/user/user.model';
 
 export interface IVideo {
@@ -19,7 +19,7 @@ export interface IVideo {
   //length in seconds
   videoLength: number;  
   //videoType declares the website the movie is coming from; eg. YouTube
-  videoOrigin: VideoOrigin
+  videoOrigin: VideoOriginEnum
   //tags for movies; assigned by movie creator/importer
   tags: Tag | Array<Tag>;    
   //internal rating by dotnet-videos users
@@ -29,7 +29,7 @@ export interface IVideo {
   //we'd also like to know the watch count
   watchedCount:  number;
 };
-export {VideoOrigin}
+export {VideoOriginEnum}
 export enum VideoDisplayMode {
   Create,
   Read,

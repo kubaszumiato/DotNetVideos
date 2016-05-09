@@ -1,7 +1,7 @@
 import {Injectable} from 'angular2/core';
 import {Http, Response, Headers} from 'angular2/http';
 //import {Observable} from 'rxjs/Observable';
-import {IVideo, VideoOrigin} from '../../../../shared/data-models/video.model.interfaces'
+import {IVideo, VideoOriginEnum} from '../../../../shared/data-models/video.model.interfaces'
 import {Observable} from 'rxjs/Rx';
 @Injectable()
 export class VideoService 
@@ -84,7 +84,7 @@ export class VideoService
             code: '',
             mediaType: '',
             videoLength: 0,
-            videoOrigin: VideoOrigin.YouTube,
+            videoOrigin: VideoOriginEnum.YouTube,
             tags: [],
             rating: 0,
             watchedCount: 0
@@ -132,7 +132,7 @@ export class VideoService
     }
     
     
-    recognizeVideoByUrl(url: string) : VideoOrigin
+    recognizeVideoByUrl(url: string) : VideoOriginEnum
     {
         //http://stackoverflow.com/questions/5830387/how-to-find-all-youtube-video-ids-in-a-string-using-a-regex/5831191#5831191
         let ytUrlRegExp: RegExp = /https?:\/\/(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube(?:-nocookie)?\.com\S*?[^\w\s-])([\w-]{11})(?=[^\w-]|$)(?![?=&+%\w.-]*(?:['"][^<>]*>|<\/a>))[?=&+%\w.-]*/ig;
@@ -145,15 +145,15 @@ export class VideoService
         
         if (url.match(ytUrlRegExp))
         {
-            return VideoOrigin.YouTube;
+            return VideoOriginEnum.YouTube;
         }
         if (url.match(vmUrlRegExp))
         {
-            return VideoOrigin.Vimeo;            
+            return VideoOriginEnum.Vimeo;            
         }
         if (url.match(ch9UrlRegExp)){
-            return VideoOrigin.Channel9;
+            return VideoOriginEnum.Channel9;
         }
-        return VideoOrigin.Unknown;        
+        return VideoOriginEnum.Unknown;        
     }
 }

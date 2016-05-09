@@ -1,6 +1,6 @@
 import {Injectable} from 'angular2/core';
 import {Control} from 'angular2/common';
-import {IVideo, VideoOrigin} from '../../../../shared/data-models/video.model.interfaces'
+import {IVideo, VideoOriginEnum} from '../../../../shared/data-models/video.model.interfaces'
 
 
 @Injectable()
@@ -18,7 +18,7 @@ export class VideoValidationService {
             console.log('validation: title is empty for video: ' + entity);
             result = false;
         }
-        if (VideoValidationService.recognizeVideoByUrl(entity.url) == VideoOrigin.Unknown) {
+        if (VideoValidationService.recognizeVideoByUrl(entity.url) == VideoOriginEnum.Unknown) {
             console.log('validation: url of the video is incorrect: ' + entity.url);
             result = false;
         }
@@ -51,7 +51,7 @@ export class VideoValidationService {
         else {
             let service = this;            
 
-            if (VideoValidationService.recognizeVideoByUrl(url) == VideoOrigin.Unknown) {
+            if (VideoValidationService.recognizeVideoByUrl(url) == VideoOriginEnum.Unknown) {
                 console.log('unrecognized url format');
                 result = { invalidUrl: true };
             }
@@ -61,7 +61,7 @@ export class VideoValidationService {
 
 
     //why this has to be static?
-    static recognizeVideoByUrl(url: string): VideoOrigin {
+    static recognizeVideoByUrl(url: string): VideoOriginEnum {
         //http://stackoverflow.com/questions/5830387/how-to-find-all-youtube-video-ids-in-a-string-using-a-regex/5831191#5831191
         let ytUrlRegExp: RegExp = /https?:\/\/(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube(?:-nocookie)?\.com\S*?[^\w\s-])([\w-]{11})(?=[^\w-]|$)(?![?=&+%\w.-]*(?:['"][^<>]*>|<\/a>))[?=&+%\w.-]*/ig;
 
@@ -73,16 +73,16 @@ export class VideoValidationService {
 
         if (url.match(ytUrlRegExp)) {
             console.log('youtube url matched');
-            return VideoOrigin.YouTube;
+            return VideoOriginEnum.YouTube;
         }
         if (url.match(vmUrlRegExp)) {
             console.log('vimeo url matched');            
-            return VideoOrigin.Vimeo;
+            return VideoOriginEnum.Vimeo;
         }
         // if (url.match(ch9UrlRegExp)) {
         //     console.log('channel9 url matched');            
         //     return VideoOrigin.Channel9;
         // }
-        return VideoOrigin.Unknown;
+        return VideoOriginEnum.Unknown;
     }
 }

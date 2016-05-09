@@ -1,4 +1,4 @@
-enum VideoOrigin {
+enum VideoOriginEnum {
     Unknown = 0,
     YouTube = 1,
     Vimeo,
@@ -6,7 +6,7 @@ enum VideoOrigin {
     
 }
 
-export {VideoOrigin};
+export {VideoOriginEnum};
 
 //let type = VideoType.YouTube
 //let videoTypeString = VideoType[type]; // displays YouTube
