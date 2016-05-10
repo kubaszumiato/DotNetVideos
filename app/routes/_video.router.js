@@ -36,7 +36,6 @@ export default (app, router) => {
     .post((req, res) => {
       
       Video.create({
-
         title: req.body.title,
         url: req.body.url,
         localUrl: req.body.localUrl,
@@ -50,7 +49,7 @@ export default (app, router) => {
       }, (err, video) => {
 
       if (err)
-        res.send('Error o tutaj: ' + err);
+        res.send('Error during video creation: ' + err);
 
       // DEBUG
       console.log(`Video created: ${video}`);

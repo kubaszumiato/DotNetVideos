@@ -24,7 +24,7 @@ export class VideoService
             //     return v1;
             // })
             )
-           // .filter(VideoValidationService.validateVideo)
+           .filter(VideoValidationService.validateVideo)
                  //{
                                         //for(let video of vids)
                   //  {

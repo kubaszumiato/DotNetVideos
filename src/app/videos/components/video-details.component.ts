@@ -85,12 +85,8 @@ export class VideoDetailsComponent {// implements OnInit {
                 
         result.controls['url'].valueChanges.subscribe(
             (value: string) => {
-                console.log('url: ' + value);
                 var origin = VideoValidationService.recognizeVideoByUrl(value);
-                console.log('origin: ' + origin);
                 this.videoDetails.videoOrigin = origin;
-                result.controls['videoOrigin'].value = this.videoOrigins[origin];
-                console.log('form control videoOrigin.value' + result.controls['videoOrigin'].value); 
             });
         
         result.valueChanges.subscribe(

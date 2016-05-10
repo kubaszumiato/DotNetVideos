@@ -71,11 +71,11 @@ export class VideoValidationService {
         //#todo
         //let ch9UrlRegExp: RegExp = /http?/;
 
-        if (url.match(ytUrlRegExp)) {
+        if (url && url.match(ytUrlRegExp)) {
             console.log('youtube url matched');
             return VideoOriginEnum.YouTube;
         }
-        if (url.match(vmUrlRegExp)) {
+        if (url && url.match(vmUrlRegExp)) {
             console.log('vimeo url matched');            
             return VideoOriginEnum.Vimeo;
         }
