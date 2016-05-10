@@ -25,7 +25,7 @@ export interface IVideo {
   //internal rating by dotnet-videos users
   rating: number;  
   //who uploaded the movie [optional]
-  owner?: User;
+ // owner?: User;
   //we'd also like to know the watch count
   watchedCount:  number;
 };

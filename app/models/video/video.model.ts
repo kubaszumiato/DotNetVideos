@@ -21,34 +21,32 @@ import User from '../user/user.model';
 // Create interface for mongoose document of the `video` collection
 interface IVideoModel extends mongoose.Document, IVideo {}
 
-// Create the schema class for the video collection
-class VideoSchema extends mongoose.Schema implements IVideo {
-  //id for the entity
-  id: string;
+
+let videoSchema = new mongoose.Schema({
+
   //each video has some title which is displayed first ot the user
-  title: string;
+  title: String,
   //each video must have an Url, whatever the place of publication
-  url: string;
+  url: String,
   //each video will have also it's url on dotnetvideos website
-  localUrl: string;
-  //code defines the unique identifier of a movie within a given website; usually it's a part of URL
-  code: string;
+  localUrl: String,
+  //code defines the unique identifier of a movie within a given website, usually it's a part of URL
+  code: String,
   //mediaType describes what kind of movie is that (what type of file preciesly speaking)
-  mediaType: string;  
+  mediaType: String,  
   //length in seconds
-  videoLength: number;  
-  //videoType declares the website the movie is coming from; eg. YouTube
-  videoOrigin: VideoOriginEnum;
-  //tags for movies; assigned by movie creator/importer
-  tags: Tag | Array<Tag>;    
+  videoLength: Number,  
+  //videoType declares the website the movie is coming from, eg. YouTube
+  videoOrigin: Number,
+  //tags for movies, assigned by movie creator/importer
+  tags: [],
   //internal rating by dotnet-videos users
-  rating: number;  
+  rating: Number,  
   //who uploaded the movie [optional]
-  owner: User;
+  //owner: User,
   //we'd also like to know the watch count
-  watchedCount:  number;
-}
-let videoSchema = new VideoSchema();
+  watchedCount:  Number,
+}); 
 
 // Duplicate the ID field.
 videoSchema.virtual('id').get(function(){

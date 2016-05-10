@@ -1,7 +1,7 @@
 <div class="container" *ngIf="videos">
 
     <div class="row">
-        <div class="col-sm-6 col-md-3" (click)="onVideoSelected(video)" *ngFor=" #video of videos ">
+        <div class="col-sm-6 col-md-3" (click)="onVideoSelected(video)" *ngFor=" let video of videos ">
             <div class="thumbnail">
                 <img *ngIf="video.thumbUrl" [src]="video.thumbUrl" />
                 <div class="caption">

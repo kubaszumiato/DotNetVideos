@@ -1,7 +1,7 @@
 import {Component, Injectable, Input, OnInit} from 'angular2/core';
 import {FORM_DIRECTIVES, FormBuilder, ControlGroup, AbstractControl, Control, Validators} from 'angular2/common';
 import {RouteParams} from 'angular2/router';
-import {EnumKeysPipe} from '../../\shared/pipes/enum.keys.pipe';
+import {EnumKeysPipe} from '../../shared/pipes/enum.keys.pipe';
 import {VideoService, VideoValidationService} from '../video.services';
 import {IVideo, VideoDisplayMode, VideoOriginEnum} from '../../../../shared/data-models/video.model.interfaces';
 
@@ -35,7 +35,7 @@ export class VideoDetailsComponent {// implements OnInit {
 
     getVideo() {
         let id = this._params.get('id');
-        if (id) {
+        if (id && id!=='') {
             this.videoService.getVideo(id).subscribe((res) => {
                 this.videoDetails = res;
                 console.log('got video: ' + res);
@@ -47,7 +47,8 @@ export class VideoDetailsComponent {// implements OnInit {
     }
 
 
-    public saveVideo(value: any) {        
+    public saveVideo(value: any) {  
+        console.log('videoDetails on submit: ' + this.videoDetails);      
         this.videoService.createVideo(this.videoDetails).subscribe(
             (res) => { 
                 this.videoDetails = res;
@@ -73,18 +74,28 @@ export class VideoDetailsComponent {// implements OnInit {
             //control for rating. Specific validator
             'rating': ['', VideoValidationService.ratingValidator],
             //video origin/source (YouTube, Vimeo, Channel9)
-            'videoOrigin': [''],
+           'videoOrigin': [''],
             //url of the video, required value
             'url': ['', VideoValidationService.urlValidator]
         });
+        
+        result.controls['title'].valueChanges.subscribe(
+           (value: string) => console.log('title changed to: ' + value)
+        )
                 
         result.controls['url'].valueChanges.subscribe(
-            (
-                value: string) => {
-                result.controls['videoOrigin']
+            (value: string) => {
+                console.log('url: ' + value);
+                var origin = VideoValidationService.recognizeVideoByUrl(value);
+                console.log('origin: ' + origin);
+                this.videoDetails.videoOrigin = origin;
+                result.controls['videoOrigin'].value = this.videoOrigins[origin];
+                console.log('form control videoOrigin.value' + result.controls['videoOrigin'].value); 
             });
+        
         result.valueChanges.subscribe(
             (value: ControlGroup) => {
+                
                 console.log('form changed to: ' + value.value);
             });
         return result;

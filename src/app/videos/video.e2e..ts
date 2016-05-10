@@ -2,13 +2,13 @@ describe('App', () => {
 
   beforeEach(() => {
     // change hash depending on router LocationStrategy
-    browser.get('/#/video');
+    browser.get('/#/home');
   });
 
 
   it('should have a title', () => {
     let subject = browser.getTitle();
-    let result  = '.NET Videos aggregation portal';
+    let result  = 'Angular 2 MEAN Webpack Starter Kit by @datatype_void';
     expect(subject).toEqual(result);
   });
 

@@ -33,14 +33,6 @@ export class VideoListComponent //implements OnInit
             );
         }
 
-    createVideo() {
-
-        this._videoService.createVideo({ title: "exampleTitle" })
-            .subscribe((res) => {
-                this.videos.push(res);
-            });
-    }
-
     //from-code approach
     onVideoSelected(selection: IVideo) {
         this.selectedVideo = selection;

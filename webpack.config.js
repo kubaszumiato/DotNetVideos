@@ -1,5 +1,3 @@
-// @datatype_void
-
 var webpack = require('webpack');
 var helpers = require('./helpers');
 var CopyWebpackPlugin = require('copy-webpack-plugin');

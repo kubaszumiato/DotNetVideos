@@ -30,12 +30,15 @@
         </fieldset>
         <fieldset>
             <label for="VideoOrigin">Source:</label>
-            <select class="form-control" [(ngModel)]="videoDetails.videoOrigin">
-                <option *ngFor="#origin of videoOrigins | keys" [value]="origin.key">{{origin.value}}</option>
+            <select class="form-control" [(ngModel)]="videoDetails.videoOrigin" ngControl="videoOrigin">
+                <option *ngFor="let origin of videoOrigins | keys" [value]="origin.key">{{origin.value}}</option>
             </select>
         </fieldset>
 
         <button type="submit" class="ui button">Submit</button>
     </form>
-    {{"abc" | uppercase}}
+    <span *ngIf="videoDetails">
+    {{videoDetails.url}} <br />
+    {{videoDetails.videoOrigin}}
+    </span>
 </div>

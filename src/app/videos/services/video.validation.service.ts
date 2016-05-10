@@ -6,13 +6,13 @@ import {IVideo, VideoOriginEnum} from '../../../../shared/data-models/video.mode
 @Injectable()
 export class VideoValidationService {
 
-    validateVideo(entity: IVideo): boolean {
+    static validateVideo(entity: IVideo): boolean {
         let result: boolean = true;
 
-        if (!entity.id) {
-            console.log('validation: id is empty for video: ' + entity);
-            result = false;
-        }
+        // if (!entity.id) {
+        //     console.log('validation: id is empty for video: ' + entity);
+        //     result = false;
+        //}
         if (!entity.title) {
 
             console.log('validation: title is empty for video: ' + entity);
@@ -63,7 +63,7 @@ export class VideoValidationService {
     //why this has to be static?
     static recognizeVideoByUrl(url: string): VideoOriginEnum {
         //http://stackoverflow.com/questions/5830387/how-to-find-all-youtube-video-ids-in-a-string-using-a-regex/5831191#5831191
-        let ytUrlRegExp: RegExp = /https?:\/\/(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube(?:-nocookie)?\.com\S*?[^\w\s-])([\w-]{11})(?=[^\w-]|$)(?![?=&+%\w.-]*(?:['"][^<>]*>|<\/a>))[?=&+%\w.-]*/ig;
+        let ytUrlRegExp: RegExp = /(https?:\/\/)?(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube(?:-nocookie)?\.com\S*?[^\w\s-])([\w-]{11})(?=[^\w-]|$)(?![?=&+%\w.-]*(?:['"][^<>]*>|<\/a>))[?=&+%\w.-]*/ig;
 
         //http://stackoverflow.com/questions/13286785/get-video-id-from-vimeo-url
         let vmUrlRegExp: RegExp = /(https?:\/\/)?(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/;

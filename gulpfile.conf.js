@@ -190,7 +190,8 @@ gulp.task('serve:watch', () => {
             })
             return tasks
         },
-        ext: 'js ts'
+        ext: 'js ts',
+        ignore: ['dist/']
     });
 });
 
