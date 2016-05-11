@@ -1,14 +1,14 @@
 <div class="container" *ngIf="videos">
-
+<!--(click)="onVideoSelected(video)"-->
     <div class="row">
-        <div class="col-sm-6 col-md-3" (click)="onVideoSelected(video)" *ngFor=" let video of videos ">
+        <div class="col-sm-6 col-md-3"  *ngFor=" let video of videos ">
             <div class="thumbnail">
                 <img *ngIf="video.thumbUrl" [src]="video.thumbUrl" />
                 <div class="caption">
                     <h3>
-                        <!--<a [routerLink] = "['Video', {id: video._id}]">-->
+                        <a [routerLink] = "['Video', {mode: 'watch', id: video._id}]">
                         {{video.title}}
-                        <!--</a>-->
+                        </a>
                         </h3>
                     <p>Length: {{video.length}}</p>
                     <p>Watched: {{video.watchedCount}}</p>

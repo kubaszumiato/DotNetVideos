@@ -1,0 +1,14 @@
+Watch
+<h1> {{video?.title}} </h1>
+
+<p>url: {{video?.url}} </p>
+<p>Origin: {{video?.videoOrigin}} </p>
+
+<video-youtube *ngIf="videoOrigins && videoOrigins[video?.videoOrigin] === 'YouTube' " [video]="video">
+</video-youtube>
+
+
+<video-vimeo *ngIf="videoOrigins && videoOrigins[video?.videoOrigin] === 'Vimeo' " [video]="video">
+</video-vimeo>
+
+<button class="btn" (onclick)="toggleEdit()">Edit</button>

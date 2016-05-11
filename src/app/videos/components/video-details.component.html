@@ -1,40 +1,46 @@
-<div class="container">
-    <form [ngFormModel]="videoForm" id="video-details-add" *ngIf="videoDetails" (ngSubmit)="saveVideo(videoForm.value)">
-        <fieldset class="form-group">
-            <label for="videoDetailsTitle">Title: </label>
-            <input type="text" class="form-control" placeholder="Title" [(ngModel)]="videoDetails.title" ngControl="title" id="videoDetailsTitle"
-            />
-            <span *ngIf="!videoForm.controls.title?.valid">
+<div class="container">    
+    <div *ngIf="displayMode === 'watch'">
+        <video-watch [video]="videoDetails">
+        </video-watch>
+    </div>
+    <div *ngIf="displayMode !== 'watch'">
+        <form [ngFormModel]="videoForm" id="video-details-add" *ngIf="videoDetails" (ngSubmit)="saveVideo(videoForm.value)">
+            <fieldset class="form-group">
+                <label for="videoDetailsTitle">Title: </label>
+                <input type="text" class="form-control" placeholder="Title" [(ngModel)]="videoDetails.title" ngControl="title" id="videoDetailsTitle"
+                />
+                <span *ngIf="!videoForm.controls.title?.valid">
                 The title is required!
             </span>
-        </fieldset>
-        <fieldset class="form-group">
-            <label>Rating: </label>
-            <input class="form-control" placeholder="rating" [(ngModel)]="videoDetails.rating" ngControl="rating" />
-            <span *ngIf="!videoForm.controls.rating?.valid">
+            </fieldset>
+            <fieldset class="form-group">
+                <label>Rating: </label>
+                <input class="form-control" placeholder="rating" [(ngModel)]="videoDetails.rating" ngControl="rating" />
+                <span *ngIf="!videoForm.controls.rating?.valid">
                 The rating must be between 0 and 5!
             </span>
-        </fieldset>
-        <fieldset class="form-group">
-            <label>url: </label>
-            <input class="form-control" placeholder="url" [(ngModel)]="videoDetails.url" ngControl="url" />
-            <ul *ngIf="!videoForm.controls.url?.valid">
-                The URL is invalid. Possible issues:<br />
-                <li *ngIf="videoForm.controls.url?.emptyUrl">
-                    The URL cannot be empty
-                </li>
-                <li *ngIf="videoForm.controls.url?.invalidUrl">
-                    The URL format was not recognized by the system.
-                </li>
-            </ul>
-        </fieldset>
-        <fieldset>
-            <label for="VideoOrigin">Source:</label>
-            <select class="form-control" [(ngModel)]="videoDetails.videoOrigin" ngControl="videoOrigin">
+            </fieldset>
+            <fieldset class="form-group">
+                <label>url: </label>
+                <input class="form-control" placeholder="url" [(ngModel)]="videoDetails.url" ngControl="url" />
+                <ul *ngIf="!videoForm.controls.url?.valid">
+                    The URL is invalid. Possible issues:<br />
+                    <li *ngIf="videoForm.controls.url?.emptyUrl">
+                        The URL cannot be empty
+                    </li>
+                    <li *ngIf="videoForm.controls.url?.invalidUrl">
+                        The URL format was not recognized by the system.
+                    </li>
+                </ul>
+            </fieldset>
+            <fieldset>
+                <label for="VideoOrigin">Source:</label>
+                <select class="form-control" [(ngModel)]="videoDetails.videoOrigin" ngControl="videoOrigin">
                 <option *ngFor="let origin of videoOrigins | keys" [value]="origin.key">{{origin.value}}</option>
             </select>
-        </fieldset>
+            </fieldset>
 
-        <button type="submit" class="ui button">Submit</button>
-    </form>
+            <button type="submit" class="ui button">Submit</button>
+        </form>
+    </div>
 </div>

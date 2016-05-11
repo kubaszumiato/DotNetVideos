@@ -37,7 +37,7 @@ export class VideoListComponent //implements OnInit
     onVideoSelected(selection: IVideo) {
         this.selectedVideo = selection;
         console.log('selected video with id: ' + selection.id);
-        this._router.navigate(['Video', { id: selection.id }]);
+        this._router.navigate(['Video', { mode: 'watch', id: selection.id }]);
     }
 
 
