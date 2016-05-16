@@ -114,8 +114,8 @@ router.route('/video/:video_id')
         res.send(err);
 
       // Only update a field if a new value has been passed in
-      if (req.body.text)
-        video.text = req.body.text;
+      if (req.body.title)
+        video.title = req.body.title;
 
       // save the video item
       return video.save((err) => {
@@ -137,22 +137,22 @@ router.route('/video/:video_id')
     // DEBUG
     console.log(`Attempting to delete video with id: ${req.params.video_id}`);
 
-    video.remove({
+    Video.remove({
 
       _id: req.params.video_id
-    }, (err, video) => {
+    }, (err) => {
 
       if (err)
         res.send(err);
 
       console.log('video successfully deleted!');
 
-      video.find((err, videos) => {
-        if (err)
-          res.send(err);
+      // Video.find((err, videos) => {
+      //   if (err)
+      //     res.send(err);
 
-        res.json(videos);
-      });
+      //   res.json(videos);
+      // });
     });
   });
 };

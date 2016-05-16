@@ -12,7 +12,7 @@
 // Define routes for the Node backend
 
 // Load our API routes for user authentication
-import authRoutes from './routes/_authentication.router';
+import authRoutes from './routes/authentication.router';
 
 // Load our API routes for the `todo` component
 //import todoRoutes from './routes/_todo.router.js';
@@ -20,7 +20,7 @@ import authRoutes from './routes/_authentication.router';
 // Load our API routes for the `recipe` component
 //import recipeRoutes from './routes/_recipe.router.js';
 
-import videoRoutes from './routes/_video.router.js';
+import videoRoutes from './routes/video.router';
 
 export default (app, router, passport) => {
 
@@ -67,9 +67,6 @@ export default (app, router, passport) => {
   // #### RESTful API Routes
 
   // Pass in our Express app and Router
-  todoRoutes(app, router);
-
-	recipeRoutes(app, router);
   
   videoRoutes(app, router);
 

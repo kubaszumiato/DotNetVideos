@@ -1,4 +1,4 @@
-import User from '../../app/models/user/user.model';
+import {IUser} from '../../app/models/user/user.model';
 
 export interface IVideoComment {
 
@@ -9,5 +9,5 @@ export interface IVideoComment {
   //commment text
   comment: string; 
   //who uploaded the comment [optional]
-  owner?: User;
+  owner?: IUser;
 };

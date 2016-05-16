@@ -150,7 +150,7 @@ export default (app, router, passport, auth, admin) => {
 
       // If there are any errors, return them
       if (err)
-        return next(err);
+        return res.send(err);
 
       // HTTP Status code `204 No Content`
       res.sendStatus(204);

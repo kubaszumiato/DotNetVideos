@@ -21,7 +21,7 @@ var passport
 // ## Authentication API object
 
 // Load user model
-import User from '../models/user.model.js';
+import User from '../models/user/user.model';
 
 // Load the Mongoose ObjectId function to cast string as
 // ObjectId

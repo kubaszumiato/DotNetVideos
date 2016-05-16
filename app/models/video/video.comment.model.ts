@@ -14,7 +14,7 @@
 import mongoose = require('mongoose');
 
 import {IVideoComment} from '../../../shared/data-models/video.comment.model.interfaces';
-import User from '../user/user.model';
+import {IUser} from '../user/user.model';
 
 // Create interface for mongoose document of the `video` collection
 interface IVideoCommentModel extends mongoose.Document, IVideoComment {}
@@ -30,7 +30,7 @@ class VideoCommentSchema extends mongoose.Schema implements IVideoComment {
   //comment text
   comment: string;
   //who uploaded the comment [optional]
-  owner: User;
+  owner: IUser;
 }
 let videoCommentSchema = new VideoCommentSchema();
 
