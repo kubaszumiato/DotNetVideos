@@ -11,8 +11,13 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a router-active [routerLink]="['Videos']">Videos <span class="sr-only">(current)</span></a></li>
                 <li><a router-active [routerLink]="['About']">About</a></li>
-                <li><a router-active [routerLink]="['Add', {mode: 'new'}]">Add</a></li>
+                <li><a router-active [routerLink]="['Add', {mode: 'new'}]">Add</a></li>                
             </ul>
+             
+                    <a class="navbar-right" router-active [routerLink]="['Login']" class="btn btn-default">Sign In</a>
+                    <a class="navbar-right" router-active [routerLink]="['Register']" class="btn btn-default">Sign up</a>
+            
+            
         </nav>
         <div class="jumbotron">
             <h1 class="display-4">{{name}}</h1>

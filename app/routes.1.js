@@ -67,9 +67,9 @@ export default (app, router, passport) => {
   // #### RESTful API Routes
 
   // Pass in our Express app and Router
- // todoRoutes(app, router);
+  todoRoutes(app, router);
 
-//	recipeRoutes(app, router);
+	recipeRoutes(app, router);
   
   videoRoutes(app, router);
 

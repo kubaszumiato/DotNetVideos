@@ -22,6 +22,7 @@ import {NgFor} from 'angular2/common';
 
 // Videos Component
 import {VideoListComponent, VideoDetailsComponent} from './videos/videos.components';
+import {UserLoginComponent, UserRegisterComponent} from './auth/authentication.component';
 
 /*
  * App Component
@@ -41,6 +42,9 @@ import {VideoListComponent, VideoDetailsComponent} from './videos/videos.compone
   { path: '/home',  name: 'Videos',  component: VideoListComponent },
   { path: '/video/:mode/:id', name: 'Video', component: VideoDetailsComponent},
   { path: '/video/:mode', name: 'Add', component: VideoDetailsComponent},
+  
+  { path: '/login', name: 'Login', component: UserLoginComponent},
+  { path: '/register', name: 'Register', component: UserRegisterComponent},
   // Async load a component using Webpack's require with
   // es6-promise-loader and webpack `require`
   { path: '/about', name: 'About', loader: () => require('es6-promise!./about/about')('About') },

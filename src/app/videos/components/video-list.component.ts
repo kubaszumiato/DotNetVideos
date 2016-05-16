@@ -14,9 +14,8 @@ import {VideoDetailsComponent} from './video-details.component';
         directives: [VideoDetailsComponent],
         template: require('./video-list.component.html')
     })
-
-export class VideoListComponent //implements OnInit 
-{
+//implements OnInit 
+export class VideoListComponent {
     // ngOnInit(): void { }
     public videos: Array<IVideo> = [];
     public selectedVideo: IVideo;

@@ -1,3 +1,5 @@
+///<reference path="../../../typings/main.d.ts"/>
+
 // ```
 // user.model.ts
 // (c) 2016 Jakub Szumiato
@@ -12,26 +14,16 @@
 // Note: MongoDB will autogenerate an _id for each User object created
 // well need to hash passwords with help of crypto
 import crypto = require('crypto');
+var bcrypt = require('bcrypt');
 
 //body-parser requires python so for now let's say goodbye to this module
 //import bodyParser = require('body-parser');
 
 // Grab the Mongoose module
 import mongoose = require('mongoose');
+var passport = require('passport');
+var bodyParser = require('body-parser');
 
-// ## Methods
-
-// ### Generate a hash
-//userSchema.methods.generateHash = function(password) {
-
-//return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-//};
-
-// ### Check if password is valid
-//userSchema.methods.validPassword = function(password) {
-
-//return bcrypt.compareSync(password, this.local.password);
-//};
 
 export interface IUser extends mongoose.Document {
     local: {
@@ -47,7 +39,7 @@ export interface IUser extends mongoose.Document {
 
 export default class User {
 
-    userSchema = new mongoose.Schema({
+    public userSchema: mongoose.Schema = new mongoose.Schema({
 
         local: {
             username: { type: String, unique: true },
@@ -57,14 +49,27 @@ export default class User {
 
         role: { type: String }
     });
+    // ## Methods
 
-    generateHash = function(password: String) {
+// ### Generate a hash
+generateHash(password) {
 
-    }
+return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
 
-    validPassword = function(password: String) {
+// ### Check if password is valid
+validPassword(password) {
 
-    }
+return bcrypt.compareSync(password, password);
+};
+
+    // generateHash = function(password: String) {
+
+    // }
+
+    // validPassword = function(password: String) {
+
+    // }
 
     // Expose the model so that it can be imported and used in
     // the controller (to search, delete, etc.)
