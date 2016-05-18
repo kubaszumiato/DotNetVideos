@@ -14,7 +14,7 @@
 import LocalStrategy from 'passport-local';
 
 // Load user model
-import User from '../app/models/user.model.js';
+import User from '../app/models/user/user.model.js';
 
 export default (passport) => {
 
@@ -76,7 +76,7 @@ export default (passport) => {
 
       _id : user._id,
 
-      username : user.local.username,
+      username : user.username,
 
       role : user.role
     };
@@ -198,9 +198,9 @@ export default (passport) => {
         // Model.find `$or` Mongoose condition
         $or : [
 
-          { 'local.username' : username },
+          { 'username' : username },
 
-          { 'local.email' : req.body.email }
+          { 'email' : req.body.email }
         ]
       }, (err, user) => {
 
@@ -235,12 +235,12 @@ export default (passport) => {
 
           // Combat case sensitivity by converting username and
           // email to lowercase characters
-          newUser.local.username = username.toLowerCase();
+          newUser.username = username.toLowerCase();
 
-          newUser.local.email = req.body.email.toLowerCase();
+          newUser.email = req.body.email.toLowerCase();
 
           // Hash password with model method
-          newUser.local.password = newUser.generateHash(password);
+          newUser.password = newUser.generateHash(password);
 
           // Save the new user
           newUser.save((err) => {
@@ -324,9 +324,9 @@ export default (passport) => {
       // Model.find `$or` Mongoose condition
       $or : [
 
-        { 'local.username' : username.toLowerCase() },
+        { 'username' : username.toLowerCase() },
 
-        { 'local.email' : username.toLowerCase() }
+        { 'email' : username.toLowerCase() }
       ]
     }, (err, user) => {
 

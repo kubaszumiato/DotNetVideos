@@ -14,7 +14,7 @@
 import mongoose = require('mongoose');
 
 import {IVideoComment} from '../../../shared/data-models/video.comment.model.interfaces';
-import {IUser} from '../user/user.model';
+import {IUser} from '../../../shared/data-models/user.model.interfaces';
 
 // Create interface for mongoose document of the `video` collection
 interface IVideoCommentModel extends mongoose.Document, IVideoComment {}

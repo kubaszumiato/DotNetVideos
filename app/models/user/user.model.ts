@@ -23,13 +23,9 @@ import crypto = require('crypto');
 import mongoose = require('mongoose');
 var passport = require('passport');
 var bodyParser = require('body-parser');
+import {IUser} from '../../../shared/data-models/user.model.interfaces';
 
-export interface IUser {
-    username: string,
-    password: string,
-    email: string,
-    role: string
-}
+
 
 export interface IUserModel extends IUser, mongoose.Document {
 }

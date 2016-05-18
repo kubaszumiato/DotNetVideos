@@ -1,1 +1,26 @@
-<p>user register</p>
+<p>Sign up for an account on my website!</p>
+
+<form [ngFormModel]="registerForm" *ngIf="user" (ngSubmit)="submitForm(registerForm.value)">
+    <fieldset class="form-group">
+        <label class="form-control">Login: </label>
+        <input class="form-control" id='txtLogin'  [ngFormControl]="myForm.controls['login']" />
+    </fieldset>
+    <fieldset class="form-group">
+        <label for='txtPassword'>Password: </label>
+        <input type="password" class="form-control" id="txtPassword"  [ngFormControl]="myForm.controls['password']" />
+    </fieldset>
+    <fieldset class="form-group">
+        <label for='txtPasswordMatch'>Confirm Password: </label>
+        <input type="password" class="form-control" id="txtPasswordMatch" [ngFormControl]="myForm.controls['passwordMatch']" />
+        <span *ngIf="!registerForm.controls.passwordMatch?.valid && registerForm.controls.passwordMatch?.isDirty">
+                The passwords don't match.
+        </span>
+    
+    </fieldset>
+    <fieldset class="form-group">
+        <label for="txtEmail">Email: </label>
+        <input type="text" class="form-control" id="txtEmail" [ngFormControl]="myForm.controls['email']" />
+    </fieldset>
+    <button class="btn" type="submit">Register</button>
+
+</form>
