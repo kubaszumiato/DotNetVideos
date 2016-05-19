@@ -2,6 +2,7 @@ import {Component, Injectable, Input, OnInit} from 'angular2/core';
 import {FORM_DIRECTIVES, FormBuilder, ControlGroup, AbstractControl, Control, Validators} from 'angular2/common';
 import {RouteParams} from 'angular2/router';
 import {IUser} from '../../../../shared/data-models/user.model.interfaces';
+import {AuthenticationService} from '../authentication.services';
 
 @Component(
     {
@@ -10,8 +11,10 @@ import {IUser} from '../../../../shared/data-models/user.model.interfaces';
     })
 
 export class UserRegisterComponent {
-  //  user: IUser;
-    registerForm: ControlGroup = new ControlGroup( {});
+    user: IUser = <IUser>{
+        
+    };
+    registerForm: ControlGroup;// = new ControlGroup( {});
     
     constructor(fb: FormBuilder){
         
@@ -22,7 +25,7 @@ export class UserRegisterComponent {
             //control for password, required value
             'password': ['', Validators.required],
             //control for password verification, required value, custom validator to match password
-            'passwordMatch': [''], //this.passwordMatchValidator],
+            'passwordMatch': [''],//, this.passwordMatchValidator],
             //video origin/source (YouTube, Vimeo, Channel9)
             'email': ['', Validators.required]
         });
@@ -41,5 +44,6 @@ export class UserRegisterComponent {
     
     submitForm(value: string):void {
         console.log(value);
+        
     }
 }
