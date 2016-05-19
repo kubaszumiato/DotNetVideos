@@ -59,7 +59,7 @@ export class AuthenticationService {
         var jsoned = JSON.stringify(data);
         console.log('service, createUser json: ' + jsoned);
 
-        return this.http.post('/api/user', JSON.stringify(data),
+        return this.http.post('/api/auth/signup', JSON.stringify(data),
             { headers: headers })
             .map(res => res.json());
     }

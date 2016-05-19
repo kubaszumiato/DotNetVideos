@@ -67,6 +67,11 @@ export class UserRegisterComponent implements OnInit {
         this.user.email = this.registerForm.controls['email'].value;
         this.user.role = this.registerForm.controls['role'].value;
 
-        this.authService.createUser(this.user);
+        this.authService.createUser(this.user).subscribe(
+            (res) => {
+                this.user = res;
+                console.log('successfully saved user with ID: ' + this.user.id)
+            },
+            (error) => console.log('error on saving video'));
     }
 }
