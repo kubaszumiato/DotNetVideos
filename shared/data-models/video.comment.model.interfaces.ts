@@ -1,4 +1,4 @@
-import {IUser} from '../../app/models/user/user.model';
+import {IUser} from './user.model.interfaces';
 
 export interface IVideoComment {
 

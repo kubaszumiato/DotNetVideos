@@ -14,9 +14,11 @@ export class UserRegisterComponent {
     registerForm: ControlGroup = new ControlGroup( {});
     
     constructor(fb: FormBuilder){
+        
         this.registerForm = fb.group({
             //control for the user's login, required value
             'login': ['', Validators.required],
+            
             //control for password, required value
             'password': ['', Validators.required],
             //control for password verification, required value, custom validator to match password
@@ -24,7 +26,7 @@ export class UserRegisterComponent {
             //video origin/source (YouTube, Vimeo, Channel9)
             'email': ['', Validators.required]
         });
-        console.log(this.registerForm);
+        console.log('register form:  ' + this.registerForm);
         
     }
     

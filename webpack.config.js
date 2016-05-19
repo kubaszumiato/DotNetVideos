@@ -54,7 +54,7 @@ module.exports = {
       //`exclude: [ helpers.root('node_modules/rxjs') ]`
       //fixed with rxjs 5 beta.3 release
       { test: /\.js$/, loader: "source-map-loader",
-        exclude: [ helpers.root('node_modules/rxjs') ]
+        exclude: [ helpers.root('node_modules/rxjs'), helpers.root('typings/main'), helpers.root('typings/main.d.ts') ]
       }
     ],
     loaders: [

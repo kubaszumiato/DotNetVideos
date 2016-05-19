@@ -1,6 +1,6 @@
 import {Tag} from '../../app/models/video/video.tag';
 import {VideoOriginEnum} from '../../app/models/video/video.enums';
-import User from '../../app/models/user/user.model';
+import {IUser} from './user.model.interfaces';
 
 export interface IVideo {
 
@@ -25,7 +25,7 @@ export interface IVideo {
   //internal rating by dotnet-videos users
   rating: number;  
   //who uploaded the movie [optional]
- // owner?: User;
+  //owner?: User;
   //we'd also like to know the watch count
   watchedCount:  number;
 };

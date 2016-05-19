@@ -10,4 +10,5 @@ import {RouteParams} from 'angular2/router';
 
 export class UserLoginComponent {
     
+    
 }
