@@ -40,9 +40,10 @@ export class AuthenticationService {
     getEmptyUser(): IUser {
         var result: IUser = {
             id: '',
-            login: '',
+            username: '',
             password: '',
-            email: ''
+            email: '',
+            role: ''
         }
 
         return result;

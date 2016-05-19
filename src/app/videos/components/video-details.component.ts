@@ -19,7 +19,7 @@ import {VideoWatchComponent} from './video-watch.component';
 export class VideoDetailsComponent {// implements OnInit {
     videoDetails: IVideo;
     videoForm: ControlGroup;
-    formBuilder: FormBuilder;
+    //formBuilder: FormBuilder;
     videoOrigins = VideoOriginEnum;
     displayMode: string;
 

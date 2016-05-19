@@ -20,5 +20,9 @@
         <label for="txtEmail">Email: </label>
         <input type="text" class="form-control" id="txtEmail" [ngFormControl]="registerForm.controls['email']" />
     </fieldset>
+    <fieldset class="form-group">
+        <label for="txtRole">Role: </label>
+        <input type="text" class="form-control" id="txtRole" [ngFormControl]="registerForm.controls['role']" />
+    </fieldset>
     <button class="btn" type="submit">Register</button>
 </form>
