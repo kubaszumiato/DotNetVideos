@@ -34,12 +34,23 @@ export class AuthenticationService {
     private handleGetUserError(error: Response) {
         console.error(error);
         return Observable.throw(error.json() || 'Server error occurred when retrieving user details');
+    }
+    
+    login(username: string, password: string){
+        
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
 
+        var jsoned = JSON.stringify({'username': username, 'password': password});
+        console.log('service, createUser json: ' + jsoned);
+
+        return this.http.post('/api/auth/login', jsoned,
+            { headers: headers })
+            .map(res => res.json());
     }
 
     getEmptyUser(): IUser {
         var result: IUser = {
-            id: '',
             username: '',
             password: '',
             email: '',

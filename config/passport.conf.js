@@ -240,7 +240,7 @@ export default (passport) => {
           newUser.email = req.body.email.toLowerCase();
 
           // Hash password with model method
-          newUser.password = newUser.password//generateHash(password);
+          newUser.password = password//generateHash(password);
 
           // Save the new user
           newUser.save((err) => {
@@ -348,7 +348,7 @@ export default (passport) => {
       }
 
       // If the user is found but the password is incorrect
-      if (!user.validPassword(password)) {
+      if (!user.validatePassword(password)) {
 
         return done(null,
 

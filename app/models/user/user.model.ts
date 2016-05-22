@@ -26,36 +26,45 @@ var bodyParser = require('body-parser');
 import {IUser} from '../../../shared/data-models/user.model.interfaces';
 
 
+export class User implements IUser {
+    username: string;
+    password: string;
+    email: string;
+    role: string;
 
-export interface IUserModel extends IUser, mongoose.Document {
+    constructor(data: {
+
+        username: string,
+        password: string,
+        email: string,
+        role: string
+    }) {
+        this.username = data.username;
+        this.password = data.password;
+        this.email = data.password;
+        this.role = data.role;
+    }
+
+    /* any method would be defined here*/
+    validatePassword(password: string): boolean {
+        return password === this.password;
+    }
 }
 
-export /**
- * UserSchema
- */
-    class UserSchema extends mongoose.Schema {
 
-    generateHash(password) {
-
-        return '';
-        //   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-    };
-
-    // ### Check if password is valid
-    validPassword(password) {
-
-        //return bcrypt.compareSync(password, password);
-        return '';
-    };
+export interface IUserModel extends User, mongoose.Document {
 }
 
-let userSchema: UserSchema = new UserSchema({
+let userSchema: mongoose.Schema = new mongoose.Schema({
 
     username: { type: String, unique: true },
     password: String,
     email: { type: String, unique: true },
     role: { type: String }
 });
+
+
+userSchema.method('validatePassword', User.prototype.validatePassword);
 
 // Expose the model so that it can be imported and used in
 // the controller (to search, delete, etc.)

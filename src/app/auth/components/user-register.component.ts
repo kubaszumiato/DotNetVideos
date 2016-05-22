@@ -70,8 +70,8 @@ export class UserRegisterComponent implements OnInit {
         this.authService.createUser(this.user).subscribe(
             (res) => {
                 this.user = res;
-                console.log('successfully saved user with ID: ' + this.user.id)
+                console.log('successfully saved user: ' + this.user.username);
             },
-            (error) => console.log('error on saving video'));
+            (error) => console.log('error on saving user. ' + error));
     }
 }
