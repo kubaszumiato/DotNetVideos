@@ -14,7 +14,7 @@
 // Note: MongoDB will autogenerate an _id for each User object created
 // well need to hash passwords with help of crypto
 import crypto = require('crypto');
-//var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-nodejs');
 
 //body-parser requires python so for now let's say goodbye to this module
 //import bodyParser = require('body-parser');
@@ -47,7 +47,11 @@ export class User implements IUser {
 
     /* any method would be defined here*/
     validatePassword(password: string): boolean {
-        return password === this.password;
+        return bcrypt.compareSync(password, this.password);
+    }
+    
+    generateHash(password: string): string {
+        return bcrypt.hashSync(password);
     }
 }
 
@@ -65,6 +69,7 @@ let userSchema: mongoose.Schema = new mongoose.Schema({
 
 
 userSchema.method('validatePassword', User.prototype.validatePassword);
+userSchema.method('generateHash', User.prototype.generateHash);
 
 // Expose the model so that it can be imported and used in
 // the controller (to search, delete, etc.)

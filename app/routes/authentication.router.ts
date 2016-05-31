@@ -73,6 +73,7 @@ export default (app, router, passport, auth, admin) => {
 
         // Set HTTP status code `200 OK`
         res.status(200);
+        req.user.password = '';
 
         // Return the user object
         res.send(req.user);
@@ -140,9 +141,9 @@ export default (app, router, passport, auth, admin) => {
       // Model.find `$or` Mongoose condition
       $or : [
 
-        { 'local.username' : req.params.uid },
+        { 'username' : req.params.uid },
 
-        { 'local.email' : req.params.uid },
+        { 'email' : req.params.uid },
 
         { '_id' : ObjectId(req.params.uid) }
       ]

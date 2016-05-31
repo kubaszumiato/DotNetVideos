@@ -54,6 +54,7 @@ exports.default = function (app, router, passport, auth, admin) {
                     return next(err);
                 // Set HTTP status code `200 OK`
                 res.status(200);
+                req.user.password = '';
                 // Return the user object
                 res.send(req.user);
             });
@@ -101,8 +102,8 @@ exports.default = function (app, router, passport, auth, admin) {
         user_model_1.default.remove({
             // Model.find `$or` Mongoose condition
             $or: [
-                { 'local.username': req.params.uid },
-                { 'local.email': req.params.uid },
+                { 'username': req.params.uid },
+                { 'email': req.params.uid },
                 { '_id': ObjectId(req.params.uid) }
             ]
         }, function (err) {

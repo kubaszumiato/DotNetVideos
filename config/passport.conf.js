@@ -12,6 +12,7 @@
 
 // Load PassportJS strategies
 import LocalStrategy from 'passport-local';
+import JwtStrategy from 'passport-jwt';
 
 // Load user model
 import User from '../app/models/user/user.model.js';
@@ -240,7 +241,7 @@ export default (passport) => {
           newUser.email = req.body.email.toLowerCase();
 
           // Hash password with model method
-          newUser.password = password//generateHash(password);
+          newUser.password = newUser.generateHash(password);
 
           // Save the new user
           newUser.save((err) => {
@@ -349,7 +350,8 @@ export default (passport) => {
 
       // If the user is found but the password is incorrect
       if (!user.validatePassword(password)) {
-
+console.log(password);
+console.log(user.generateHash(password));
         return done(null,
 
           false,

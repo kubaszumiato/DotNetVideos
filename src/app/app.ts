@@ -30,7 +30,6 @@ import {UserLoginComponent, UserRegisterComponent} from './auth/authentication.c
  */
 @Component({
   selector: 'app',
-  providers: [  ],
   directives: [NgFor],
   pipes: [],
   // Load our main `Sass` file into our `app` `component`
@@ -58,8 +57,8 @@ export class App {
 
   constructor() {
 
-  }
-}
+  }  
+  
 
 /*
  * Please review the https://github.com/datatype_void/angular2-examples/ repo as it is updated for

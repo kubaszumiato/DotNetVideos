@@ -74,4 +74,12 @@ export class AuthenticationService {
             { headers: headers })
             .map(res => res.json());
     }
+    
+    isLoggedIn() : Observable<IUser> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        
+        return this.http.get('/api/auth/loggedIn').map<IUser>(u => u.json());
+//        { header: headers})
+    }
 }
