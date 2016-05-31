@@ -12,7 +12,6 @@
 
 // Load PassportJS strategies
 import LocalStrategy from 'passport-local';
-import JwtStrategy from 'passport-jwt';
 
 // Load user model
 import User from '../app/models/user/user.model.js';
@@ -22,41 +21,41 @@ export default (passport) => {
   // Define length boundariess for expected parameters
   let bounds = {
 
-    username : {
+    username: {
 
-      minLength : 3,
+      minLength: 3,
 
-      maxLength : 16
+      maxLength: 16
     },
 
-    password : {
+    password: {
 
-      minLength : 8,
+      minLength: 8,
 
-      maxLength : 128
+      maxLength: 128
     },
 
-    email : {
+    email: {
 
-      minLength : 5,
+      minLength: 5,
 
-      maxLength : 256
+      maxLength: 256
     }
   };
 
   // Function to check a string against a REGEX for email validity
   let validateEmail = (email) => {
 
-      let re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    let re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 
-      return re.test(email);
+    return re.test(email);
   };
 
   // Helper function to validate string length
   let checkLength = (string, min, max) => {
 
     // If the string is outside the passed in bounds...
-    if(string.length > max || string.length < min)
+    if (string.length > max || string.length < min)
       return false;
 
     else
@@ -75,11 +74,11 @@ export default (passport) => {
 
     let sessionUser = {
 
-      _id : user._id,
+      _id: user._id,
 
-      username : user.username,
+      username: user.username,
 
-      role : user.role
+      role: user.role
     };
 
     done(null, sessionUser);
@@ -106,155 +105,157 @@ export default (passport) => {
   passport.use('local-signup', new LocalStrategy({
 
     // By default, the local strategy uses username and password
-    usernameField : 'username',
+    usernameField: 'username',
 
-    passwordField : 'password',
+    passwordField: 'password',
 
     // Allow the entire request to be passed back to the callback
-    passReqToCallback : true
+    passReqToCallback: true
   },
 
-  (req, username, password, done) => {
+    (req, username, password, done) => {
 
-    // ## Data Checks
+      // ## Data Checks
 
-    // If the length of the username string is too long/short,
-    // invoke verify callback
-    if(!checkLength(username, bounds.username.minLength, bounds.username.maxLength)) {
+      // If the length of the username string is too long/short,
+      // invoke verify callback
+      if (!checkLength(username, bounds.username.minLength, bounds.username.maxLength)) {
 
-      // ### Verify Callback
+        // ### Verify Callback
 
-      // Invoke `done` with `false` to indicate authentication
-      // failure
-      return done(null,
+        // Invoke `done` with `false` to indicate authentication
+        // failure
+        return done(null,
 
-        false,
+          false,
 
-        // Return info message object
-        { signupMessage : 'Invalid username length.' }
-      );
-    }
+          // Return info message object
+          { signupMessage: 'Invalid username length.' }
+        );
+      }
 
-    // If the length of the password string is too long/short,
-    // invoke verify callback
-    if(!checkLength(password, bounds.password.minLength, bounds.password.maxLength)) {
+      // If the length of the password string is too long/short,
+      // invoke verify callback
+      if (!checkLength(password, bounds.password.minLength, bounds.password.maxLength)) {
 
-      // ### Verify Callback
+        // ### Verify Callback
 
-      // Invoke `done` with `false` to indicate authentication
-      // failure
-      return done(null,
+        // Invoke `done` with `false` to indicate authentication
+        // failure
+        return done(null,
 
-        false,
+          false,
 
-        // Return info message object
-        { signupMessage : 'Invalid password length.' }
-      );
-    }
+          // Return info message object
+          { signupMessage: 'Invalid password length.' }
+        );
+      }
 
-    // If the length of the email string is too long/short,
-    // invoke verify callback
-    if(!checkLength(req.body.email, bounds.email.minLength, bounds.email.maxLength)) {
+      // If the length of the email string is too long/short,
+      // invoke verify callback
+      if (!checkLength(req.body.email, bounds.email.minLength, bounds.email.maxLength)) {
 
-      // ### Verify Callback
+        // ### Verify Callback
 
-      // Invoke `done` with `false` to indicate authentication
-      // failure
-      return done(null,
+        // Invoke `done` with `false` to indicate authentication
+        // failure
+        return done(null,
 
-        false,
+          false,
 
-        // Return info message object
-        { signupMessage : 'Invalid email length.' }
-      );
-    }
+          // Return info message object
+          { signupMessage: 'Invalid email length.' }
+        );
+      }
 
-    // If the string is not a valid email...
-    if(!validateEmail(req.body.email)) {
+      // If the string is not a valid email...
+      if (!validateEmail(req.body.email)) {
 
-      // ### Verify Callback
+        // ### Verify Callback
 
-      // Invoke `done` with `false` to indicate authentication
-      // failure
-      return done(null,
+        // Invoke `done` with `false` to indicate authentication
+        // failure
+        return done(null,
 
-        false,
+          false,
 
-        // Return info message object
-        { signupMessage : 'Invalid email address.' }
-      );
-    }
+          // Return info message object
+          { signupMessage: 'Invalid email address.' }
+        );
+      }
 
-    // Asynchronous
-    // User.findOne will not fire unless data is sent back
-    process.nextTick(() => {
+      // Asynchronous
+      // User.findOne will not fire unless data is sent back
+      process.nextTick(() => {
 
-      // Find a user whose email or username is the same as the passed
-      // in data
+        // Find a user whose email or username is the same as the passed
+        // in data
 
-      // We are checking to see if the user trying to login already
-      // exists
-      User.findOne({
+        // We are checking to see if the user trying to login already
+        // exists
+        User.findOne({
 
-        // Model.find `$or` Mongoose condition
-        $or : [
+          // Model.find `$or` Mongoose condition
+          $or: [
 
-          { 'username' : username },
+            { 'username': username },
 
-          { 'email' : req.body.email }
-        ]
-      }, (err, user) => {
+            { 'email': req.body.email }
+          ]
+        }, (err, user) => {
 
-        // If there are any errors, return the error
-        if (err)
-          return done(err);
+          // If there are any errors, return the error
+          if (err)
+            return done(err);
 
-        // If a user exists with either of those ...
-        if(user) {
+          // If a user exists with either of those ...
+          if (user) {
 
-          // ### Verify Callback
+            // ### Verify Callback
 
-          // Invoke `done` with `false` to indicate authentication
-          // failure
-          return done(null,
+            // Invoke `done` with `false` to indicate authentication
+            // failure
+            return done(null,
 
-            false,
+              false,
 
-            // Return info message object
-            { signupMessage : 'That username/email is already ' +
-            'taken.' }
-          );
+              // Return info message object
+              {
+                signupMessage: 'That username/email is already ' +
+                'taken.'
+              }
+            );
 
-        } else {
+          } else {
 
-          // If there is no user with that email or username...
+            // If there is no user with that email or username...
 
-          // Create the user
-          let newUser = new User();
+            // Create the user
+            let newUser = new User();
 
-          // Set the user's local credentials
+            // Set the user's local credentials
 
-          // Combat case sensitivity by converting username and
-          // email to lowercase characters
-          newUser.username = username.toLowerCase();
+            // Combat case sensitivity by converting username and
+            // email to lowercase characters
+            newUser.username = username.toLowerCase();
 
-          newUser.email = req.body.email.toLowerCase();
+            newUser.email = req.body.email.toLowerCase();
 
-          // Hash password with model method
-          newUser.password = newUser.generateHash(password);
+            // Hash password with model method
+            newUser.password = newUser.generateHash(password);
 
-          // Save the new user
-          newUser.save((err) => {
+            // Save the new user
+            newUser.save((err) => {
 
-            if (err)
-              throw err;
+              if (err)
+                throw err;
 
-            return done(null, newUser);
-          });
-        }
+              return done(null, newUser);
+            });
+          }
+        });
       });
-    });
-  }));
+    }));
 
   // # Local Login
 
@@ -266,101 +267,108 @@ export default (passport) => {
   passport.use('local-login', new LocalStrategy({
 
     // By default, local strategy uses username and password
-    usernameField : 'username',
+    usernameField: 'username',
 
-    passwordField : 'password',
+    passwordField: 'password',
 
     // Allow the entire request to be passed back to the callback
-    passReqToCallback : true
+    passReqToCallback: true
   },
 
-  (req, username, password, done) => {
+    (req, username, password, done) => {
 
-    // ## Data Checks
+      // ## Data Checks
 
-    // If the length of the username string is too long/short,
-    // invoke verify callback.
-    // Note that the check is against the bounds of the email
-    // object. This is because emails can be used to login as
-    // well.
-    if(!checkLength(username, bounds.username.minLength, bounds.email.maxLength)) {
+      // If the length of the username string is too long/short,
+      // invoke verify callback.
+      // Note that the check is against the bounds of the email
+      // object. This is because emails can be used to login as
+      // well.
+      if (!checkLength(username, bounds.username.minLength, bounds.email.maxLength)) {
 
-      // ### Verify Callback
+        // ### Verify Callback
 
-      // Invoke `done` with `false` to indicate authentication
-      // failure
-      return done(null,
-
-        false,
-
-        // Return info message object
-        { loginMessage : 'Invalid username/email length.' }
-      );
-    }
-
-    // If the length of the password string is too long/short,
-    // invoke verify callback
-    if(!checkLength(password, bounds.password.minLength, bounds.password.maxLength)) {
-
-      // ### Verify Callback
-
-      // Invoke `done` with `false` to indicate authentication
-      // failure
-      return done(null,
-
-        false,
-
-        // Return info message object
-        { loginMessage : 'Invalid password length.' }
-      );
-    }
-
-    // Find a user whose email or username is the same as the passed
-    // in data
-
-    // Combat case sensitivity by converting username to lowercase
-    // characters
-    User.findOne({
-
-      // Model.find `$or` Mongoose condition
-      $or : [
-
-        { 'username' : username.toLowerCase() },
-
-        { 'email' : username.toLowerCase() }
-      ]
-    }, (err, user) => {
-
-      // If there are any errors, return the error before anything
-      // else
-      if (err)
-        return done(err);
-
-      // If no user is found, return a message
-      if (!user) {
-
+        // Invoke `done` with `false` to indicate authentication
+        // failure
         return done(null,
 
           false,
 
-          { loginMessage : 'That user was not found. ' +
-          'Please enter valid user credentials.' }
+          // Return info message object
+          { loginMessage: 'Invalid username/email length.' }
         );
       }
 
-      // If the user is found but the password is incorrect
-      if (!user.validatePassword(password)) {
-console.log(password);
-console.log(user.generateHash(password));
+      // If the length of the password string is too long/short,
+      // invoke verify callback
+      if (!checkLength(password, bounds.password.minLength, bounds.password.maxLength)) {
+
+        // ### Verify Callback
+
+        // Invoke `done` with `false` to indicate authentication
+        // failure
         return done(null,
 
           false,
 
-          { loginMessage : 'Invalid password entered.' });
+          // Return info message object
+          { loginMessage: 'Invalid password length.' }
+        );
       }
 
-      // Otherwise all is well; return successful user
-      return done(null, user);
-    });
-  }));
+      // Find a user whose email or username is the same as the passed
+      // in data
+
+      // Combat case sensitivity by converting username to lowercase
+      // characters
+      User.findOne({
+
+        // Model.find `$or` Mongoose condition
+        $or: [
+
+          { 'username': username.toLowerCase() },
+
+          { 'email': username.toLowerCase() }
+        ]
+      }, (err, user) => {
+
+        // If there are any errors, return the error before anything
+        // else
+        if (err)
+          return done(err);
+
+        // If no user is found, return a message
+        if (!user) {
+
+          return done(null,
+
+            false,
+
+            {
+              loginMessage: 'That user was not found. ' +
+              'Please enter valid user credentials.'
+            }
+          );
+        }
+
+        // If the user is found but the password is incorrect
+        try {
+          if (!user.validatePassword(password)) {
+            console.log(password);
+            console.log(user.generateHash(password));
+            return done(null,
+
+              false,
+
+              { loginMessage: 'Invalid password entered.' });
+          }
+        }
+        catch (error) {
+          return done(null, false, { loginMessage: 'The password is incorrect' });
+        }
+
+        // Otherwise all is well; return successful user
+        return done(null, user);
+      });
+    }));
 };
