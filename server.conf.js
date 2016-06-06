@@ -68,6 +68,7 @@ mongooseConf(mongoose);
 
 // Import PassportJS configuration
 import passportConf from './config/passport.conf.js';
+var jwt = require('express-jwt');
 
 // Pass Passport configuration our PassportJS instance
 passportConf(passport);
@@ -97,19 +98,19 @@ app.use(express.static(__dirname + '/dist'));
 // ## Passport JS
 
 // Session secret
-app.use(session({
+// app.use(session({
 
-  secret : process.env.SESSION_SECRET,
+//   secret : process.env.SESSION_SECRET,
 
-  resave : true,
+//   resave : true,
 
-  saveUninitialized : true
-}));
+//   saveUninitialized : true
+// }));
 
-app.use(passport.initialize());
+ app.use(passport.initialize());
 
-// Persistent login sessions
-app.use(passport.session());
+// // Persistent login sessions
+// app.use(passport.session());
 
 // ## Routes
 
