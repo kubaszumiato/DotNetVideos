@@ -54,7 +54,7 @@ exports.default = function (app, router, passport, auth, admin) {
             //     return next(err);
             //   // Set HTTP status code `200 OK`
             //   res.status(200);
-            //   req.user.password = '';
+            //  // req.user.password = '';
             //   // Return the user object
             //   res.send(req.user);
             // });
@@ -66,9 +66,13 @@ exports.default = function (app, router, passport, auth, admin) {
                 // Return the info message
                 return next('There is a problem with the secret used to sign the JWT token');
             }
-            var jwt = require('express-jwt');
-            var token = jwt.encode({ username: user.username }, tokenSecret);
-            res.json({ token: token });
+            var jwt = require('jsonwebtoken');
+            var token = jwt.sign(user, tokenSecret);
+            res.json({
+                success: true,
+                message: 'Authentication succeeded',
+                token: token
+            });
         })(req, res, next);
     });
     router.post('/auth/signup', function (req, res, next) {

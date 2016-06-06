@@ -66,32 +66,36 @@ export default (app, router, passport, auth, admin) => {
 
       // // Use login function exposed by Passport to establish a login
       // // session
-      req.login(user, (err) => {
+      // req.login(user, (err) => {
 
-        if (err)
-          return next(err);
+      //   if (err)
+      //     return next(err);
 
-        // Set HTTP status code `200 OK`
-        res.status(200);
-       // req.user.password = '';
+      //   // Set HTTP status code `200 OK`
+      //   res.status(200);
+      //  // req.user.password = '';
 
-        // Return the user object
-        res.send(req.user);
-      });
+      //   // Return the user object
+      //   res.send(req.user);
+      // });
 
       // Use passport-jwt to provide with JWT token
       // user has authenticated correctly thus we create a JWT token 
-    //   var tokenSecret = process.env.SESSION_SECRET;
-    //   if (!tokenSecret)
-    //   {
-    //     res.status(401);
+      var tokenSecret = process.env.SESSION_SECRET;
+      if (!tokenSecret)
+      {
+        res.status(401);
 
-    //     // Return the info message
-    //     return next('There is a problem with the secret used to sign the JWT token');
-    //   }
-    // var jwt = require('express-jwt');
-    // var token = jwt.encode({ username: user.username}, tokenSecret);
-    // res.json({ token : token });
+        // Return the info message
+        return next('There is a problem with the secret used to sign the JWT token');
+      }
+    var jwt = require('jsonwebtoken');
+    var token = jwt.sign(user, tokenSecret);
+    res.json({
+      success: true,
+      message: 'Authentication succeeded',
+      token: token
+    });
 
     }) (req, res, next);
   });

@@ -68,7 +68,7 @@ mongooseConf(mongoose);
 
 // Import PassportJS configuration
 import passportConf from './config/passport.conf.js';
-var jwt = require('express-jwt');
+var jwt = require('jsonwebtoken');// require('express-jwt');
 
 // Pass Passport configuration our PassportJS instance
 passportConf(passport);
